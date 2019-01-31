@@ -6,7 +6,7 @@ Make sure you have the source code for MySQL and have done a cmake on it.  This 
 #### Compiling the Plugin
 Below is the way that I compiled the plugin.  You will obviously need to make changes to match your environment.
 
-SRCBASE="../percona-server-5.7.24-27"
+    SRCBASE="../percona-server-5.7.24-27"
     g++ -DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
     -I/usr/include/mysql -m64 \
     -I${SRCBASE}/sql \
