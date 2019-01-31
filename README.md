@@ -18,6 +18,7 @@ Below is the way that I compiled the plugin.  You will obviously need to make ch
 
 #### Plugin Installation
 Copy the resulting osmetricsplugin.so file to the location of plugin_dir in MySQL.
+
     cp osmetricsplugin.so /usr/lib64/mysql/plugin/
 
     mysql> INSTALL PLUGIN OS_METRICS SONAME 'osmetricsplugin.so';
