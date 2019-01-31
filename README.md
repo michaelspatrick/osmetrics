@@ -15,10 +15,9 @@ Make sure you have the source code for MySQL and have done a cmake on it.  This 
     -o osmetricsplugin.so osmetricsplugin.cc
 
 #### Plugin Installation
-Copy the resulting osmetricsplugin.so file to the location of plugin_dir in MySQL.  For me, this is:
+Copy the resulting osmetricsplugin.so file to the location of plugin_dir in MySQL.
     cp osmetricsplugin.so /usr/lib64/mysql/plugin/
 
-Then, login to MySQL and Install the plugin with the following:
     mysql> INSTALL PLUGIN OS_METRICS SONAME 'osmetricsplugin.so';
 
 #### Verify Installation
@@ -31,7 +30,6 @@ Then, login to MySQL and Install the plugin with the following:
     1 row in set (0.00 sec)
 
 #### Query the Plugin
-To get results, the following SQL query will return metrics:
     mysql> SELECT * FROM information_schema.OS_METRICS;
     +---------------+------------+
     | NAME          | VALUE      |
@@ -44,5 +42,4 @@ To get results, the following SQL query will return metrics:
     4 rows in set (0.00 sec)
 
 #### Plugin Uninstallation
-When you need to make changes, you may uninstall the plugin with this SQL command:
     mysql> UNINSTALL PLUGIN OS_METRICS;
