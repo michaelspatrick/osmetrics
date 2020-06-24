@@ -9,6 +9,8 @@ Also, none of the calculations were rounded.  This was done just to keep precisi
 
 If there is interest, this could be expanded to add more metrics and unnecessary ones removed.  Just looking for feedback.
 
+Also keep in mind that my C programming skills are rusty and I am sure the code could be cleaned up.
+
 Make sure you have the source code for MySQL and have done a cmake on it.  This will be necessary to compile the plugin.
 
 #### Compiling the Plugin
