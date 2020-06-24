@@ -79,9 +79,6 @@ Copy the resulting osmetricsplugin.so file to the location of plugin_dir in MySQ
 #### Future Additions
 Below are some ideas for possible additions.
 * Swappiness Setting
-* Swap Usage
-* Memory Used
-* Memory Free
 * CPU Utilization
 * Datadir Disk Usage (Space used, remaining, etc.)
 * Some data in iostat and vmstat (key metrics)
