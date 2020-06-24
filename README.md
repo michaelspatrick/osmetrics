@@ -1,5 +1,13 @@
 # mysql_os_metrics
-A MySQL plugin for storing Operating System metrics in INFORMATION_SCHEMA.  This will allow monitoring tools, such as PMM, to retrieve these values remotely via the MySQL interface.  This is just a Proof of Concept (POC) at this point in time and needs to be expanded greatly.
+A MySQL plugin for displaying Operating System metrics in INFORMATION_SCHEMA.  This would allow monitoring tools, such as PMM, to retrieve these values remotely via the MySQL interface.  This is just a Proof of Concept (POC) at this point in time and needs to be expanded greatly.
+
+Values are pulled via standard C library calls so overhead is absolutely minimal.  I added a couple of libraries originally to show that even Windows and other variants of UNIX can be utilized, but commented them out to keep it all simple for now.
+
+Many variables were added to show what was possible.  Some of these may not be of interest.  I just wanted to see what kind of stuff was possible and would tweak these over time.  
+
+Also, none of the calculations were rounded.  This was done just to keep precision for graphing of values but could easily be canged later.
+
+If there is interest, this could be expanded to add more metrics and unnecessary ones removed.  Just looking for feedback.
 
 Make sure you have the source code for MySQL and have done a cmake on it.  This will be necessary to compile the plugin.
 
