@@ -33,16 +33,45 @@ Copy the resulting osmetricsplugin.so file to the location of plugin_dir in MySQ
     1 row in set (0.00 sec)
 
 #### Query the Plugin
-    mysql> SELECT * FROM information_schema.OS_METRICS;
-    +---------------+------------+
-    | NAME          | VALUE      |
-    +---------------+------------+
-    | MEMORY_TOTAL  | 1040621568 |
-    | LOADAVG_1MIN  |       0.12 |
-    | LOADAVG_5MIN  |       0.05 |
-    | LOADAVG_15MIN |       0.06 |
-    +---------------+------------+
-    4 rows in set (0.00 sec)
+mysql> SELECT * FROM information_schema.OS_METRICS;
++----------------+-------------------+----------------------------------------+
+| NAME           | VALUE             | COMMENT                                |
++----------------+-------------------+----------------------------------------+
+| TOTAL_RAM      |        1039118336 | Total usable main memory size          |
+| FREE_RAM       |         341049344 | Available memory size                  |
+| USED_RAM       |         698068992 | Used memory size                       |
+| FREE_RAM_PCT   | 32.82102966308594 | Available memory as a percentage       |
+| USED_RAM_PCT   | 67.17897033691406 | Free memory as a percentage            |
+| SHARED_RAM     |                 0 | Amount of shared memory                |
+| BUFFER_RAM     |           2158592 | Memory used by buffers                 |
+| TOTAL_HIGH_RAM |                 0 | Total high memory size                 |
+| FREE_HIGH_RAM  |                 0 | Available high memory size             |
+| TOTAL_LOW_RAM  |        1039118336 | Total low memory size                  |
+| FREE_LOW_RAM   |         341049344 | Available low memory size              |
+| LOAD_1MIN      |      0.0029296875 | 1 minute load average                  |
+| LOAD_5MIN      |      0.0146484375 | 5 minute load average                  |
+| LOAD_15MIN     |     0.04541015625 | 15 minute load average                 |
+| UPTIME         |             23410 | Uptime (in seconds)                    |
+| UPTIME_DAYS    |                 0 | Uptime (in days)                       |
+| UPTIME_HOURS   |                 6 | Uptime (in hours)                      |
+| TOTAL_SWAP     |         859828224 | Total swap space size                  |
+| FREE_SWAP      |         859828224 | Swap space available                   |
+| USED_SWAP      |                 0 | Swap space used                        |
+| FREE_SWAP_PCT  |               100 | Swap space available as a percentage   |
+| USED_SWAP_PCT  |                 0 | Swap space used as a percentage        |
+| PROCS          |               138 | Number of current processes            |
+| UTIME          |          1.654309 | Total user time                        |
+| STIME          |          0.550062 | Total system time                      |
+| MAXRSS         |            199372 | Maximum resident set size              |
+| MAXRSS_BYTES   |         204156928 | Maximum resident set size (in bytes)   |
+| MINFLT         |             23438 | Page reclaims (soft page faults)       |
+| MAJFLT         |                 0 | Page faults                            |
+| INBLOCK        |              7680 | Number of block input operations       |
+| OUBLOCK        |             33592 | Number of block output operations      |
+| NVCSW          |             42043 | Number of voluntary context switches   |
+| NIVCSW         |                38 | Number of involuntary context switches |
++----------------+-------------------+----------------------------------------+
+33 rows in set (0.00 sec)
 
 #### Plugin Uninstallation
     mysql> UNINSTALL PLUGIN OS_METRICS;
