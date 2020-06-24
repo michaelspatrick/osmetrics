@@ -27,7 +27,8 @@ static int simple_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   struct rusage buf;
   struct sysinfo info;
   TABLE *table= tables->table;
-  //load = getLoadAvg();
+  
+  //load = getLoadAvg();  /* pulls from a separate library but changed to doing natively */
   sysinfo(&info);
   getrusage(RUSAGE_SELF, &buf);
   
