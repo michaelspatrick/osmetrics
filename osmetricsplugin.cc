@@ -11,6 +11,8 @@
 #include <sys/resource.h>
 #include <sys/sysinfo.h>
 
+extern char *mysql_data_home;
+
 static struct st_mysql_information_schema simple_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 
 static ST_FIELD_INFO simple_table_fields[]=
@@ -31,6 +33,31 @@ static int simple_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   //load = getLoadAvg();  /* pulls from a separate library but changed to doing natively */
   sysinfo(&info);
   getrusage(RUSAGE_SELF, &buf);
+  statvfs(mysql_data_home, &disk);
+  
+  // Datadir Size
+  table->field[0]->store("DATADIR_SIZE", 13, system_charset_info);
+  table->field[1]->store(disk.f_blocks * disk.f_frsize);
+  table->field[2]->store("MySQL data directory size", 25, system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // Datadir Size Free
+  table->field[0]->store("DATADIR_SIZE_FREE", 18, system_charset_info);
+  table->field[1]->store(disk.f_bfree * disk.f_frsize);
+  table->field[2]->store("MySQL data directory size free space", 36, system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // Datadir Size Used
+  table->field[0]->store("DATADIR_SIZE_USED", 18, system_charset_info);
+  table->field[1]->store((disk.f_blocks * disk.f_frsize) - (disk.f_bfree * disk.f_frsize));
+  table->field[2]->store("MySQL data directory size used space", 36, system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // Datadir Size Used Percentage
+  table->field[0]->store("DATADIR_SIZE_USED_PCT", 22, system_charset_info);
+  table->field[1]->store(((double) ((disk.f_blocks * disk.f_frsize) - (disk.f_bfree * disk.f_frsize)) / (double) (disk.f_blocks * disk.f_frsize)) * (double) 100);
+  table->field[2]->store("MySQL data directory used space as a percentage", 47, system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
   
   // Total RAM - works for various OS
   //table->field[0]->store("MEMORY_TOTAL", 12, system_charset_info);
