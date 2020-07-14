@@ -51,9 +51,11 @@ Copy the resulting osmetricsplugin.so file to the location of plugin_dir in MySQ
     1 row in set (0.01 sec)
 
 You will need to copy the compiled plugin to this directory:
+
     cp -f osmetricsplugin.so /jet/var/mysqld/plugin/
 
 Finally, you can login to MySQL and activate the plugin:
+
     mysql> INSTALL PLUGIN OS_METRICS SONAME 'osmetricsplugin.so';
 
 #### Verify Installation
