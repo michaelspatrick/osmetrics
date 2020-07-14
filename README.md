@@ -16,16 +16,19 @@ Make sure you have the source code for MySQL and have done a cmake on it.  This 
 #### Compiling the Plugin
 Below is the way that I compiled the plugin.  You will obviously need to make changes to match your environment.
 You will also need to have the Percona Server source code on your server:
-wget https://www.percona.com/downloads/Percona-Server-5.7/Percona-Server-5.7.17-13/source/tarball/percona-server-5.7.17-13.tar.gz
+
+    wget https://www.percona.com/downloads/Percona-Server-5.7/Percona-Server-5.7.17-13/source/tarball/percona-server-5.7.17-13.tar.gz
 
 I also had to add a few utilities:
-sudo yum install cmake
-sudo yum install boost
-sudo yum install ncurses-devel
-sudo yum install readline-devel
-cmake -DDOWNLOAD_BOOST=1 -DWITH_BOOST=.. 
+
+    sudo yum install cmake
+    sudo yum install boost
+    sudo yum install ncurses-devel
+    sudo yum install readline-devel
+    cmake -DDOWNLOAD_BOOST=1 -DWITH_BOOST=.. 
 
 Once the above was complete, I was able to compile with something like the following:
+
     SRCBASE="/home/ec2-user/percona-server-5.7.17-13"
     g++ -DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
     -I/usr/include/mysql -m64 \
