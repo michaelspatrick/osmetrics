@@ -82,6 +82,8 @@ Finally, you can login to MySQL and activate the plugin:
     | cpu_iowait            |                    0 | Processes waiting for I/O to complete                              |
     | cpu_irq               |                   26 | Processes servicing interrupts                                     |
     | cpu_softirq           |                 1387 | Processes servicing Softirqs                                       |
+    | cpu_guest             |                    0 | Processes running a guest                                          |
+    | cpu_guest_nice        |                    0 | Processes running a niced guest                                    |
     | cpu_intr              |              1136775 | Count of interrupts serviced since boot time                       |
     | cpu_ctxt              |              4217435 | Total number of context switches across all CPUs                   |
     | cpu_btime             |           1594829433 | Ttime at which the system booted, in seconds since the Unix epoch  |
@@ -149,7 +151,7 @@ Finally, you can login to MySQL and activate the plugin:
     | eth0_tx_errors        |                    0 | Number of errors on received packets                               |
     | eth0_rx_errors        |                    0 | Number of errors on sent packets                                   |
     +-----------------------+----------------------+--------------------------------------------------------------------+
-    76 rows in set (0.00 sec)
+    78 rows in set (0.00 sec)
 
 #### Plugin Uninstallation
     mysql> UNINSTALL PLUGIN OS_METRICS;
