@@ -9,12 +9,12 @@ CFLAGS=-DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
 -I./includes \
 -I./
 
-osmetricsplugin.so: osmetricsplugin.c
-        $(CC) $(CFLAGS) -o osmetricsplugin.so osmetricsplugin.c
+osmetricsplugin.so: osmetrics.c
+        $(CC) $(CFLAGS) -o osmetrics.so osmetrics.c
 
 clean:
-      	rm -f /jet/var/mysqld/plugin/osmetricsplugin.so
-        rm -f osmetricsplugin.so
+      	rm -f /jet/var/mysqld/plugin/osmetrics.so
+        rm -f osmetrics.so
 
 install:
-        cp -f osmetricsplugin.so /jet/var/mysqld/plugin/
+        cp -f osmetrics.so /jet/var/mysqld/plugin/
