@@ -26,12 +26,6 @@ I also had to add a few utilities:
     sudo yum install ncurses-devel
     sudo yum install readline-devel
     cmake -DDOWNLOAD_BOOST=1 -DWITH_BOOST=.. 
-
-Once the above was complete, you need to edit the Makefile and then compile:
-
-    make clean
-    make
-    make install
     
 #### Plugin Installation
 You will need to know where your plugin directory is.  You can query that with the following SQL:
@@ -44,8 +38,12 @@ You will need to know where your plugin directory is.  You can query that with t
     +---------------+-------------------------+
     1 row in set (0.01 sec)
 
-You will need to edit the Makefile and define this path there.
+You will need to edit the Makefile and define this path there.  Then you can compile the plugin:
 
+    make clean
+    make
+    make install
+    
 Finally, you can login to MySQL and activate the plugin:
 
     mysql> INSTALL PLUGIN OS_METRICS SONAME 'osmetricsplugin.so';
