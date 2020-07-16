@@ -130,7 +130,7 @@ static int simple_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   double proctimes = ( ps.user + ps.nice + ps.sys + ps.idle + ps.iowait + ps.irq + ps.softirq );
   double avg_idle_pct = (double)ps.idle * 100 / proctimes;
   strcpy(fieldname, "cpu_idle_pct");
-  strcpy(comment, "Average CPU Idleness");
+  strcpy(comment, "Average CPU idleness");
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
   table->field[1]->store(avg_idle_pct);
   table->field[2]->store(comment, strlen(comment), system_charset_info);
