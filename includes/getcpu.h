@@ -15,6 +15,8 @@ struct procstat{
   int iowait;
   int irq;
   int softirq;
+  int guest;
+  int guest_nice;
   int intr;
   int ctxt;
   int btime;
@@ -35,7 +37,7 @@ procstat getprocstat(void) {
 
   while (fgets(line, sizeof(line), fp)) {
     if (strstr(line, "cpu ")) {
-      sscanf( line, "%s %s %d %d %d %d %d %d %d", dummy, id, &ps.user, &ps.nice, &ps.sys, &ps.idle, &ps.iowait, &ps.irq, &ps.softirq);
+      sscanf( line, "%s %s %d %d %d %d %d %d %d %d %d", dummy, id, &ps.user, &ps.nice, &ps.sys, &ps.idle, &ps.iowait, &ps.irq, &ps.softirq, &ps.guest, &ps.guest_nice);
     } else if (strstr(line, "intr")) {
       sscanf( line, "%s %d", dummy, &ps.intr);
     } else if (strstr(line, "ctxt")) {
