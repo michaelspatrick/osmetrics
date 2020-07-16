@@ -30,7 +30,7 @@ static ST_FIELD_INFO simple_table_fields[]=
 {
   {"NAME", 25, MYSQL_TYPE_STRING, 0, 0, 0, 0},
   {"VALUE", 6, MYSQL_TYPE_FLOAT, 0, MY_I_S_UNSIGNED, 0, 0},
-  {"COMMENT", 50, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"COMMENT", 75, MYSQL_TYPE_STRING, 0, 0, 0, 0},
   {0, 0, MYSQL_TYPE_NULL, 0, 0, 0, 0}
 };
 
@@ -46,9 +46,40 @@ static int simple_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   int family, n;
   char fieldname[50];
   char comment[100];
+  //struct procstat ps;
 
   procstat ps;
   ps = getprocstat();
+
+  // CPU Num Cores
+  if (ps.numcores >= 0) {
+    strcpy(fieldname, "cpu_numcores");
+    strcpy(comment, "Number of virtual CPU cores");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.numcores);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU Speed
+  if (ps.cpu_speed >= 0) {
+    strcpy(fieldname, "cpu_speed");
+    strcpy(comment, "CPU speed in MHz");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.cpu_speed);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU Bogomips
+  if (ps.cpu_speed >= 0) {
+    strcpy(fieldname, "cpu_bogomips");
+    strcpy(comment, "CPU bogomips");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.cpu_bogomips);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
 
   // CPU User Time Overall
   strcpy(fieldname, "cpu_user");
@@ -126,11 +157,81 @@ static int simple_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
     if (schema_table_store_record(thd, table)) return 1;
   }
 
+  // CPU INTERRUPTS
+  if (ps.intr >= 0) {
+    strcpy(fieldname, "cpu_intr");
+    strcpy(comment, "Count of interrupts serviced since boot time");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.intr);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU CTXT Overall
+  if (ps.ctxt >= 0) {
+    strcpy(fieldname, "cpu_ctxt");
+    strcpy(comment, "Total number of context switches across all CPUs");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.ctxt);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU BTIME Overall
+  if (ps.btime >= 0) {
+    strcpy(fieldname, "cpu_btime");
+    strcpy(comment, "Ttime at which the system booted, in seconds since the Unix epoch");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.btime);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU Processes Overall
+  if (ps.processes >= 0) {
+    strcpy(fieldname, "cpu_processes");
+    strcpy(comment, "Number of processes and threads created");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.processes);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU Processes Running Overall
+  if (ps.procs_running >= 0) {
+    strcpy(fieldname, "cpu_procs_running");
+    strcpy(comment, "Total number of threads that are running or ready to run");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.procs_running);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU Processes Blocked Overall
+  if (ps.procs_blocked >= 0) {
+    strcpy(fieldname, "cpu_procs_blocked");
+    strcpy(comment, "Number of processes currently blocked, waiting for I/O to complete");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.procs_blocked);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU IRQ Overall
+  if (ps.softirq >= 0) {
+    strcpy(fieldname, "cpu_softirq");
+    strcpy(comment, "Counts of softirqs serviced since boot time");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.softirq);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
   // CPU Util Overall
   double proctimes = ( ps.user + ps.nice + ps.sys + ps.idle + ps.iowait + ps.irq + ps.softirq );
   double avg_idle_pct = (double)ps.idle * 100 / proctimes;
   strcpy(fieldname, "cpu_idle_pct");
-  strcpy(comment, "Average CPU idleness");
+  strcpy(comment, "Average CPU idle time");
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
   table->field[1]->store(avg_idle_pct);
   table->field[2]->store(comment, strlen(comment), system_charset_info);
