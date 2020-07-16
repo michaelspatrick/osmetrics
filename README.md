@@ -81,7 +81,7 @@ Finally, you can login to MySQL and activate the plugin:
     | cpu_softirq           |                 17 | Processes servicing Softirqs                       |
     | cpu_guest             |               1295 | Processes running a guest                          |
     | cpu_guest_nice        |                  0 | Processes running a niced guest                    |
-    | cpu_idle_pct          |   99.1614460524705 | Average CPU Idleness                               |
+    | cpu_idle_pct          |   99.1614460524705 | Average CPU idleness                               |
     | cpu_util_pct          | 0.8385539475295047 | Average CPU utilization                            |
     | datadir_size          |         8318783488 | MySQL data directory size                          |
     | datadir_size_free     |         2314506240 | MySQL data directory size free space               |
