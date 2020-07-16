@@ -46,7 +46,6 @@ static int simple_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   int family, n;
   char fieldname[50];
   char comment[100];
-  //struct procstat ps;
 
   procstat ps;
   ps = getprocstat();
