@@ -28,7 +28,7 @@ I also had to add a few utilities:
     cmake -DDOWNLOAD_BOOST=1 -DWITH_BOOST=.. 
     
 #### Plugin Installation
-First, you will need to put the plugin code in the plugin directory in the source code you downloaded.  For me, this was "/home/ec2-user/percona-server-5.7.17-13/plugin" and I named the directory "osmetrics".  This directory contains the following files:
+First, you will need to put the plugin code in the plugin directory of the source code you downloaded.  For me, this was "/home/ec2-user/percona-server-5.7.17-13/plugin" and I named the directory "osmetrics".  This directory contains the following files:
 
     includes  Makefile  osmetrics.c  README.md
 
