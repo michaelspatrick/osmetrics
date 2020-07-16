@@ -9,6 +9,7 @@
 #include <my_global.h>
 //#include <includes/getmem.h>
 //#include <includes/getload.h>
+#include <includes/getcpu.h>
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/sysinfo.h>
@@ -45,6 +46,104 @@ static int simple_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   int family, n;
   char fieldname[50];
   char comment[100];
+  //struct procstat ps;
+
+  procstat ps;
+  ps = getprocstat();
+
+  // CPU User Time Overall
+  strcpy(fieldname, "cpu_user");
+  strcpy(comment, "Normal processes executing in user mode");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store(ps.user);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // CPU Nice Time Overall
+  strcpy(fieldname, "cpu_nice");
+  strcpy(comment, "Niced processes executing in user mode");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store(ps.nice);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // CPU Sys Overall
+  strcpy(fieldname, "cpu_sys");
+  strcpy(comment, "Processes executing in kernel mode");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store(ps.sys);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // CPU Idle Overall
+  strcpy(fieldname, "cpu_idle");
+  strcpy(comment, "Processes which are idle");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store(ps.idle);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // CPU IOWAIT Overall
+  strcpy(fieldname, "cpu_iowait");
+  strcpy(comment, "Processes waiting for I/O to complete");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store(ps.iowait);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // CPU IRQ Overall
+  strcpy(fieldname, "cpu_irq");
+  strcpy(comment, "Processes servicing interrupts");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store(ps.irq);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // CPU SOFTIRQ Overall
+  strcpy(fieldname, "cpu_softirq");
+  strcpy(comment, "Processes servicing Softirqs");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store(ps.softirq);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // CPU GUEST Overall
+  if (ps.guest >= 0) {
+    strcpy(fieldname, "cpu_guest");
+    strcpy(comment, "Processes running a guest");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.guest);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU NICEGUEST Overall
+  if (ps.guest_nice >= 0) {
+    strcpy(fieldname, "cpu_guest_nice");
+    strcpy(comment, "Processes running a niced guest");
+    table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+    table->field[1]->store(ps.guest_nice);
+    table->field[2]->store(comment, strlen(comment), system_charset_info);
+    if (schema_table_store_record(thd, table)) return 1;
+  }
+
+  // CPU Util Overall
+  double proctimes = ( ps.user + ps.nice + ps.sys + ps.idle + ps.iowait + ps.irq + ps.softirq );
+  double avg_idle_pct = (double)ps.idle * 100 / proctimes;
+  strcpy(fieldname, "cpu_idle_pct");
+  strcpy(comment, "Average CPU Idleness");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store(avg_idle_pct);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
+  // CPU Util Overall
+  strcpy(fieldname, "cpu_util_pct");
+  strcpy(comment, "Average CPU utilization");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store((100 - avg_idle_pct));
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
 
   //load = getLoadAvg();  /* pulls from a separate library but changed to doing natively */
   sysinfo(&info);
