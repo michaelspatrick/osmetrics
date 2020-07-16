@@ -27,20 +27,14 @@ I also had to add a few utilities:
     sudo yum install readline-devel
     cmake -DDOWNLOAD_BOOST=1 -DWITH_BOOST=.. 
 
-Once the above was complete, I was able to compile with something like the following:
+Once the above was complete, you need to edit the Makefile and then compile:
 
-    SRCBASE="/home/ec2-user/percona-server-5.7.17-13"
-    g++ -DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
-    -I/usr/include/mysql -m64 \
-    -I${SRCBASE}/sql \
-    -I${SRCBASE}/include \
-    -I${SRCBASE}/libbinlogevents/export \
-    -I${SRCBASE}/libbinlogevents/include \
-    -I/home/ec2-user/mysql_os_metrics-master \
-    -o osmetricsplugin.so osmetricsplugin.cc
-
+    make clean
+    make
+    make install
+    
 #### Plugin Installation
-Copy the resulting osmetricsplugin.so file to the location of plugin_dir in MySQL.  You will need to know where your plugin directory is.  You can query that with the following SQL:
+You will need to know where your plugin directory is.  You can query that with the following SQL:
 
     mysql> SHOW GLOBAL VARIABLES LIKE "%plugin_dir%";
     +---------------+-------------------------+
@@ -50,9 +44,7 @@ Copy the resulting osmetricsplugin.so file to the location of plugin_dir in MySQ
     +---------------+-------------------------+
     1 row in set (0.01 sec)
 
-You will need to copy the compiled plugin to this directory:
-
-    cp -f osmetricsplugin.so /jet/var/mysqld/plugin/
+You will need to edit the Makefile and define this path there.
 
 Finally, you can login to MySQL and activate the plugin:
 
