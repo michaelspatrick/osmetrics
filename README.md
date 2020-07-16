@@ -30,7 +30,7 @@ I also had to add a few utilities:
 #### Plugin Installation
 First, you will need to put the plugin code in the plugin directory in the source code you downloaded.  For me, this was "/home/ec2-user/percona-server-5.7.17-13/plugin" and I named the directory "osmetrics".  This directory contains the following files:
 
-    includes  Makefile  osmetricsplugin.c  README.md
+    includes  Makefile  osmetrics.c  README.md
 
 Next, you will need to know where your MySQL plugin directory is located.  You can query that with the following SQL:
 
@@ -50,14 +50,14 @@ You will then need to edit the Makefile and define this path there.  Once that i
     
 Finally, you can login to MySQL and activate the plugin:
 
-    mysql> INSTALL PLUGIN OS_METRICS SONAME 'osmetricsplugin.so';
+    mysql> INSTALL PLUGIN OS_METRICS SONAME 'osmetrics.so';
 
 #### Verify Installation
     mysql> SELECT * FROM information_schema.PLUGINS WHERE PLUGIN_NAME LIKE "%OS%";;
     +-------------+----------------+---------------+--------------------+---------------------+--------------------+------------------------+-----------------+-------------------------------------+----------------+-------------+
     | PLUGIN_NAME | PLUGIN_VERSION | PLUGIN_STATUS | PLUGIN_TYPE        | PLUGIN_TYPE_VERSION | PLUGIN_LIBRARY     | PLUGIN_LIBRARY_VERSION | PLUGIN_AUTHOR   | PLUGIN_DESCRIPTION                  | PLUGIN_LICENSE | LOAD_OPTION |
     +-------------+----------------+---------------+--------------------+---------------------+-------------------+------------------------+-----------------+-------------------------------------+----------------+-------------+
-    | OS_METRICS  | 1.0            | ACTIVE        | INFORMATION SCHEMA | 50724.0             | osmetricsplugin.so | 1.7                    | Michael Patrick | OS Metrics INFORMATION_SCHEMA table | GPL            | ON          |
+    | OS_METRICS  | 1.0            | ACTIVE        | INFORMATION SCHEMA | 50724.0             | osmetrics.so       | 1.7                    | Michael Patrick | OS Metrics INFORMATION_SCHEMA table | GPL            | ON          |
     +-------------+----------------+---------------+--------------------+---------------------+--------------------+------------------------+-----------------+-------------------------------------+----------------+-------------+
     1 row in set (0.00 sec)
 
