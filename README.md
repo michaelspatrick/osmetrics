@@ -62,6 +62,24 @@ Finally, you can login to MySQL and activate the plugins:
     mysql> INSTALL PLUGIN OS_VMSTAT SONAME 'osmetrics-vmstat.so';
 
 #### Verify Installation
+    mysql> SHOW PLUGINS;
+    +-----------------------------+----------+--------------------+------------------------+---------+
+    | Name                        | Status   | Type               | Library                | License |
+    +-----------------------------+----------+--------------------+------------------------+---------+
+    ...
+    | OS_CPU                      | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpu.so       | GPL     |
+    | OS_CPUINFO                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpuinfo.so   | GPL     |
+    | OS_DISKSTATS                | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskstats.so | GPL     |
+    | OS_LOADAVG                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-loadavg.so   | GPL     |
+    | OS_MEMORY                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-memory.so    | GPL     |
+    | OS_METRICS                  | ACTIVE   | INFORMATION SCHEMA | osmetrics.so           | GPL     |
+    | OS_MISC                     | ACTIVE   | INFORMATION SCHEMA | osmetrics-misc.so      | GPL     |
+    | OS_MOUNTS                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-mounts.so    | GPL     |
+    | OS_NETWORK                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-network.so   | GPL     |
+    | OS_SWAPS                    | ACTIVE   | INFORMATION SCHEMA | osmetrics-swaps.so     | GPL     |
+    | OS_VMSTAT                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-vmstat.so    | GPL     |
+    +-----------------------------+----------+--------------------+------------------------+---------+
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPU;
     +---------------+---------------------+--------------------------------------------------------------------+
     | name          | value               | comment                                                            |
