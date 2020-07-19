@@ -56,8 +56,8 @@ procstat getprocstat(void) {
   }
 
   fclose(fp);
-  
-    // Read /proc/cpuinfo
+
+  // Read /proc/cpuinfo
   fp = fopen("/proc/cpuinfo", "r");
   assert(fp != NULL);
   char *token;
