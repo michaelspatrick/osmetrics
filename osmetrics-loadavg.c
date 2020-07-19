@@ -24,9 +24,9 @@ static struct st_mysql_information_schema osmetrics_loadavg_table_info = { MYSQL
 
 static ST_FIELD_INFO osmetrics_loadavg_table_fields[]=
 {
-  {"NAME", 25, MYSQL_TYPE_STRING, 0, 0, 0, 0},
-  {"VALUE", 6, MYSQL_TYPE_FLOAT, 0, MY_I_S_UNSIGNED, 0, 0},
-  {"COMMENT", 75, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"name", 25, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"value", 6, MYSQL_TYPE_FLOAT, 0, MY_I_S_UNSIGNED, 0, 0},
+  {"comment", 75, MYSQL_TYPE_STRING, 0, 0, 0, 0},
   {0, 0, MYSQL_TYPE_NULL, 0, 0, 0, 0}
 };
 
