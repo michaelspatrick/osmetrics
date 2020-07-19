@@ -354,7 +354,6 @@ Finally, you can login to MySQL and activate the plugins:
     130 rows in set (0.00 sec)
 
 #### Plugin Uninstallation
-    mysql> UNINSTALL PLUGIN OS_METRICS;
     mysql> UNINSTALL PLUGIN OS_CPU;
     mysql> UNINSTALL PLUGIN OS_CPUINFO;
     mysql> UNINSTALL PLUGIN OS_LOADAVG;
