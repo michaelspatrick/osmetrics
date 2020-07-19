@@ -63,7 +63,7 @@ Finally, you can login to MySQL and activate the plugins:
 #### Verify Installation
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPU;
     +---------------+---------------------+--------------------------------------------------------------------+
-    | NAME          | VALUE               | COMMENT                                                            |
+    | name          | value               | comment                                                            |
     +---------------+---------------------+--------------------------------------------------------------------+
     | numcores      |                   1 | Number of virtual CPU cores                                        |
     | speed         |      2300.123046875 | CPU speed in MHz                                                   |
@@ -136,7 +136,7 @@ Finally, you can login to MySQL and activate the plugins:
 
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_LOADAVG;
     +--------+-------+------------------------+
-    | NAME   | VALUE | COMMENT                |
+    | name   | value | comment                |
     +--------+-------+------------------------+
     | 1_min  |     0 | 1 minute load average  |
     | 5_min  |     0 | 5 minute load average  |
@@ -146,7 +146,7 @@ Finally, you can login to MySQL and activate the plugins:
     
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_MEMORY;
     +----------------+-----------------------+--------------------------------------+
-    | NAME           | VALUE                 | COMMENT                              |
+    | name           | value                 | comment                              |
     +----------------+-----------------------+--------------------------------------+
     | total_ram      |            2090319872 | Total usable main memory size        |
     | free_ram       |            1452339200 | Available memory size                |
@@ -166,7 +166,7 @@ Finally, you can login to MySQL and activate the plugins:
     
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_MISC;
     +-----------------------+-------------------+-------------------------------------------------+
-    | NAME                  | VALUE             | COMMENT                                         |
+    | name                  | value             | comment                                         |
     +-----------------------+-------------------+-------------------------------------------------+
     | datadir_size          |        8318783488 | MySQL data directory size                       |
     | datadir_size_free     |        2277470208 | MySQL data directory size free space            |
@@ -204,9 +204,9 @@ Finally, you can login to MySQL and activate the plugins:
     +-----------+------------+------------+----------+----------+------------+------------+-----------+-----------+
     2 rows in set (0.00 sec)
     
-    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_SWAPS;
+    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_SWAPINFO;
     +---------------+-------+--------------------------------------+
-    | NAME          | VALUE | COMMENT                              |
+    | name          | value | comment                              |
     +---------------+-------+--------------------------------------+
     | total_swap    |     0 | Total swap space size                |
     | free_swap     |     0 | Swap space available                 |
