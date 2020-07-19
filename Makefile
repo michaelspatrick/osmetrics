@@ -11,8 +11,9 @@ CFLAGS=-DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
 -I./includes \
 -I./
 
-all: osmetrics-cpu.so osmetrics-network.so osmetrics-loadavg.so osmetrics-swapinfo.so osmetrics-memory.so osmetrics-vmstat.so osmetrics-cpuinfo.so osmetrics-mounts.so osmetrics-misc.so osmetrics-diskstats.so osmetrics-version.so
-
+all: osmetrics-cpu.so osmetrics-network.so osmetrics-loadavg.so osmetrics-swapinfo.so osmetrics-memory.so osmetrics-vmstat.so osmetrics-cpuinfo.so osmetrics-mounts.so osmetrics-misc.so \
+     osmetrics-diskstats.so osmetrics-version.so
+     
 osmetrics-cpu.so: osmetrics-cpu.c
         $(CC) $(CFLAGS) -o osmetrics-cpu.so osmetrics-cpu.c
 
