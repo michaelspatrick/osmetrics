@@ -30,7 +30,7 @@ I also had to add a few utilities:
 #### Plugin Installation
 First, you will need to put the plugin code in the plugin directory of the source code you downloaded.  For me, this was "/home/ec2-user/percona-server-5.7.17-13/plugin" and I named the directory "osmetrics".  This directory contains the following files:
 
-    includes  Makefile  osmetrics-cpu.c  osmetrics-cpuinfo.c  osmetrics-loadavg.c  osmetrics-memory.c  osmetrics-misc.c  osmetrics-mounts.c  osmetrics-network.c  osmetrics-swaps.c  osmetrics-vmstat.c  README.md
+    includes  Makefile  osmetrics-cpu.c  osmetrics-cpuinfo.c  osmetrics-diskstats.c  osmetrics-loadavg.c  osmetrics-memory.c  osmetrics-misc.c  osmetrics-mounts.c  osmetrics-network.c  osmetrics-swaps.c  osmetrics-vmstat.c  README.md
 
 Next, you will need to know where your MySQL plugin directory is located.  You can query that with the following SQL:
 
@@ -52,6 +52,7 @@ Finally, you can login to MySQL and activate the plugins:
 
     mysql> INSTALL PLUGIN OS_CPU SONAME 'osmetrics-cpu.so';
     mysql> INSTALL PLUGIN OS_CPUINFO SONAME 'osmetrics-cpuinfo.so';
+    mysql> INSTALL PLUGIN OS_DISKSTATS SONAME 'osmetrics-diskstats.so';
     mysql> INSTALL PLUGIN OS_LOADAVG SONAME 'osmetrics-loadavg.so';
     mysql> INSTALL PLUGIN OS_MEMORY SONAME 'osmetrics-memory.so';
     mysql> INSTALL PLUGIN OS_MISC SONAME 'osmetrics-misc.so';
@@ -133,6 +134,16 @@ Finally, you can login to MySQL and activate the plugins:
     | power management                         |                                                                                                                                                                                                                                                         |
     +------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     27 rows in set (0.00 sec)
+
+    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_DISKSTATS;
+    +-----------+-----------+--------+---------------+--------------+--------------+---------------+----------------+---------------+-----------------+----------------+-----------------+------------------+---------------------------+
+    | major_num | minor_num | device | reads_success | reads_merged | sectors_read | time_reads_ms | writes_success | writes_merged | sectors_written | time_writes_ms | ios_in_progress | time_doing_io_ms | weighted_time_doing_io_ms |
+    +-----------+-----------+--------+---------------+--------------+--------------+---------------+----------------+---------------+-----------------+----------------+-----------------+------------------+---------------------------+
+    |       202 |         0 | xvda   |         10286 |           10 |       472913 |          7312 |           4137 |          2472 |          351864 |          14276 |               0 |             4452 |                     21580 |
+    |       202 |         1 | xvda1  |         10209 |           10 |       468929 |          7280 |           4137 |          2472 |          351864 |          14276 |               0 |             4436 |                     21548 |
+    |       202 |         2 | xvda2  |            40 |            0 |         3504 |            24 |              0 |             0 |               0 |              0 |               0 |               24 |                        24 |
+    +-----------+-----------+--------+---------------+--------------+--------------+---------------+----------------+---------------+-----------------+----------------+-----------------+------------------+---------------------------+
+    3 rows in set (0.00 sec)
 
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_LOADAVG;
     +--------+-------+------------------------+
@@ -356,6 +367,7 @@ Finally, you can login to MySQL and activate the plugins:
 #### Plugin Uninstallation
     mysql> UNINSTALL PLUGIN OS_CPU;
     mysql> UNINSTALL PLUGIN OS_CPUINFO;
+    mysql> UNINSTALL PLUGIN OS_DISKSTATS;
     mysql> UNINSTALL PLUGIN OS_LOADAVG;
     mysql> UNINSTALL PLUGIN OS_MEMORY;
     mysql> UNINSTALL PLUGIN OS_MISC;
