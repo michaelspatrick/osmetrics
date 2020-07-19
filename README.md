@@ -42,7 +42,7 @@ Next, you will need to know where your MySQL plugin directory is located.  You c
     +---------------+-------------------------+
     1 row in set (0.01 sec)
 
-You will then need to edit the Makefile and define this path there.  Once that is complete, you can compile the plugin:
+You will then need to edit the Makefile and define this path there.  Once that is complete, you can compile the plugins:
 
     make clean
     make
@@ -58,7 +58,8 @@ Finally, you can login to MySQL and activate the plugins:
     mysql> INSTALL PLUGIN OS_MISC SONAME 'osmetrics-misc.so';
     mysql> INSTALL PLUGIN OS_MOUNTS SONAME 'osmetrics-mounts.so';
     mysql> INSTALL PLUGIN OS_NETWORK SONAME 'osmetrics-network.so';
-    mysql> INSTALL PLUGIN OS_SWAPS SONAME 'osmetrics-swaps.so';
+    mysql> INSTALL PLUGIN OS_SWAPINFO SONAME 'osmetrics-swapinfo.so';
+    mysql> INSTALL PLUGIN OS_VERSION SONAME 'osmetrics-version.so';    
     mysql> INSTALL PLUGIN OS_VMSTAT SONAME 'osmetrics-vmstat.so';
 
 #### Verify Installation
@@ -75,7 +76,8 @@ Finally, you can login to MySQL and activate the plugins:
     | OS_MISC                     | ACTIVE   | INFORMATION SCHEMA | osmetrics-misc.so      | GPL     |
     | OS_MOUNTS                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-mounts.so    | GPL     |
     | OS_NETWORK                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-network.so   | GPL     |
-    | OS_SWAPS                    | ACTIVE   | INFORMATION SCHEMA | osmetrics-swaps.so     | GPL     |
+    | OS_SWAPINFO                 | ACTIVE   | INFORMATION SCHEMA | osmetrics-swapinfo.so  | GPL     |
+    | OS_VERSION                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-version.so  | GPL     |
     | OS_VMSTAT                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-vmstat.so    | GPL     |
     +-----------------------------+----------+--------------------+------------------------+---------+
 
@@ -354,6 +356,19 @@ Finally, you can login to MySQL and activate the plugins:
     | swap_ra_hit               |        0 |
     +---------------------------+----------+
     130 rows in set (0.00 sec)
+    
+    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_VERSION;
+    +------------+---------------------------+
+    | name       | value                     |
+    +------------+---------------------------+
+    | sysname    | Linux                     |
+    | nodename   | ip-172-31-25-133          |
+    | release    | 4.14.181-108.257.amzn1.x8 |
+    | version    | #1 SMP Wed May 27 02:43:0 |
+    | machine    | x86_64                    |
+    | domainname | (none)                    |
+    +------------+---------------------------+
+    6 rows in set (0.00 sec)
 
 #### Plugin Uninstallation
     mysql> UNINSTALL PLUGIN OS_CPU;
@@ -364,5 +379,6 @@ Finally, you can login to MySQL and activate the plugins:
     mysql> UNINSTALL PLUGIN OS_MISC;
     mysql> UNINSTALL PLUGIN OS_MOUNTS;
     mysql> UNINSTALL PLUGIN OS_NETWORK;
-    mysql> UNINSTALL PLUGIN OS_SWAPS;
+    mysql> UNINSTALL PLUGIN OS_SWAPINFO;
+    mysql> UNINSTALL PLUGIN OS_VERSION;
     mysql> UNINSTALL PLUGIN OS_VMSTAT;
