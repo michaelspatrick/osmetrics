@@ -1,4 +1,4 @@
-# MySQL OSMETRICS PLUGINS
+# MySQL OSMetrics Plugins
 A collection of MySQL plugins for displaying Operating System metrics in INFORMATION_SCHEMA.  This would allow monitoring tools, such as PMM, to retrieve these values remotely via the MySQL interface.
 
 Values are pulled via standard C library calls and some are read from the /proc filesystem so overhead is absolutely minimal.  I added a couple of libraries originally to show that even Windows and other variants of UNIX can be utilized, but commented them out to keep it all simple for now.
