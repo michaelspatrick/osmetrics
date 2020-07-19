@@ -1,3 +1,5 @@
+PLUGINDIR="/jet/var/mysqld/plugin"
+
 CC=g++
 CFLAGS=-DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
 -I/usr/include/mysql -m64 \
@@ -45,17 +47,17 @@ osmetrics-version.so: osmetrics-version.c
         $(CC) $(CFLAGS) -o osmetrics-version.so osmetrics-version.c
 
 clean:
-      	rm -f /jet/var/mysqld/plugin/osmetrics-cpu.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-network.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-loadavg.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-swapinfo.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-memory.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-vmstat.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-cpuinfo.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-mounts.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-misc.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-diskstats.so
-        rm -f /jet/var/mysqld/plugin/osmetrics-version.so
+      	rm -f ${PLUGINDIR}/osmetrics-cpu.so
+        rm -f ${PLUGINDIR}/osmetrics-network.so
+        rm -f ${PLUGINDIR}/osmetrics-loadavg.so
+        rm -f ${PLUGINDIR}/osmetrics-swapinfo.so
+        rm -f ${PLUGINDIR}/osmetrics-memory.so
+        rm -f ${PLUGINDIR}/osmetrics-vmstat.so
+        rm -f ${PLUGINDIR}/osmetrics-cpuinfo.so
+        rm -f ${PLUGINDIR}/osmetrics-mounts.so
+        rm -f ${PLUGINDIR}/osmetrics-misc.so
+        rm -f ${PLUGINDIR}/osmetrics-diskstats.so
+        rm -f ${PLUGINDIR}/osmetrics-version.so
         rm -f osmetrics-cpu.so
         rm -f osmetrics-network.so
         rm -f osmetrics-loadavg.so
@@ -66,17 +68,17 @@ clean:
         rm -f osmetrics-mounts.so
         rm -f osmetrics-misc.so
         rm -f osmetrics-diskstats.so
-        rm -f osmetrics-version.so        
+        rm -f osmetrics-version.so
 
 install:
-        cp -f osmetrics-cpu.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-network.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-loadavg.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-swapinfo.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-memory.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-vmstat.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-cpuinfo.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-mounts.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-misc.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-diskstats.so /jet/var/mysqld/plugin/
-        cp -f osmetrics-version.so /jet/var/mysqld/plugin/
+        cp -f osmetrics-cpu.so ${PLUGINDIR}
+        cp -f osmetrics-network.so ${PLUGINDIR}
+        cp -f osmetrics-loadavg.so ${PLUGINDIR}
+        cp -f osmetrics-swapinfo.so ${PLUGINDIR}
+        cp -f osmetrics-memory.so ${PLUGINDIR}
+        cp -f osmetrics-vmstat.so ${PLUGINDIR}
+        cp -f osmetrics-cpuinfo.so ${PLUGINDIR}
+        cp -f osmetrics-mounts.so ${PLUGINDIR}
+        cp -f osmetrics-misc.so ${PLUGINDIR}
+        cp -f osmetrics-diskstats.so ${PLUGINDIR}
+        cp -f osmetrics-version.so ${PLUGINDIR}
