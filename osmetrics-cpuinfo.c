@@ -58,32 +58,25 @@ char* uniq_spc(char* str){
 static int osmetrics_cpuinfo_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
 {
   TABLE *table= tables->table;
-  char line[256];
+  char line[512];
   FILE* fp = fopen("/proc/cpuinfo", "r");
-  char *token;
-  //char name[255], val[255];
+  unsigned int i = 0;
+  int j = 0;
 
   assert(fp != NULL);
   while (fgets(line, sizeof(line), fp)) {
-    token = strtok(line, ":");
-    token = uniq_spc(token);
-    token = strip_tabs(token);
-    token = strip_newlines(token);
-if (strlen(token) > 1) {
-    table->field[0]->store(token, strlen(token), system_charset_info);
-    while (token != NULL) {
-      token = strip_newlines(token);
-      token = uniq_spc(token);
-      token = strip_tabs(token);
-      token = strip_newlines(token);
-      table->field[1]->store(token, strlen(token), system_charset_info);
-      token = strtok(NULL, ":");
+    if (strlen(line) > 1) {
+      if (strstr(line, "processor") != NULL) j=0;
+      char val[256]="";
+      char *pos = strchr(line, ':');
+      pos = strip_newlines(pos);
+      for (i=2; i< strlen(pos); i++) strncat(val, &pos[i], 1);
+      table->field[j]->store(val, strlen(val), system_charset_info);
+      j++;
     }
-    if (schema_table_store_record(thd, table)) return 1;
-}
   }
+  if (schema_table_store_record(thd, table)) return 1;
   fclose(fp);
-
   return 0;
 }
 
