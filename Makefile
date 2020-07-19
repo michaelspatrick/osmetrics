@@ -9,7 +9,7 @@ CFLAGS=-DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
 -I./includes \
 -I./
 
-all: osmetrics-cpu.so osmetrics-network.so osmetrics-loadavg.so osmetrics-swapinfo.so osmetrics-memory.so osmetrics-vmstat.so osmetrics-cpuinfo.so osmetrics-mounts.so osmetrics-misc.so osmetrics-diskstats.so
+all: osmetrics-cpu.so osmetrics-network.so osmetrics-loadavg.so osmetrics-swapinfo.so osmetrics-memory.so osmetrics-vmstat.so osmetrics-cpuinfo.so osmetrics-mounts.so osmetrics-misc.so osmetrics-diskstats.so osmetrics-version.so
 
 osmetrics-cpu.so: osmetrics-cpu.c
         $(CC) $(CFLAGS) -o osmetrics-cpu.so osmetrics-cpu.c
@@ -40,6 +40,9 @@ osmetrics-misc.so: osmetrics-misc.c
 
 osmetrics-diskstats.so: osmetrics-diskstats.c
         $(CC) $(CFLAGS) -o osmetrics-diskstats.so osmetrics-diskstats.c
+        
+osmetrics-version.so: osmetrics-version.c
+        $(CC) $(CFLAGS) -o osmetrics-version.so osmetrics-version.c
 
 clean:
       	rm -f /jet/var/mysqld/plugin/osmetrics-cpu.so
@@ -52,6 +55,7 @@ clean:
         rm -f /jet/var/mysqld/plugin/osmetrics-mounts.so
         rm -f /jet/var/mysqld/plugin/osmetrics-misc.so
         rm -f /jet/var/mysqld/plugin/osmetrics-diskstats.so
+        rm -f /jet/var/mysqld/plugin/osmetrics-version.so
         rm -f osmetrics-cpu.so
         rm -f osmetrics-network.so
         rm -f osmetrics-loadavg.so
@@ -62,6 +66,7 @@ clean:
         rm -f osmetrics-mounts.so
         rm -f osmetrics-misc.so
         rm -f osmetrics-diskstats.so
+        rm -f osmetrics-version.so        
 
 install:
         cp -f osmetrics-cpu.so /jet/var/mysqld/plugin/
@@ -74,3 +79,4 @@ install:
         cp -f osmetrics-mounts.so /jet/var/mysqld/plugin/
         cp -f osmetrics-misc.so /jet/var/mysqld/plugin/
         cp -f osmetrics-diskstats.so /jet/var/mysqld/plugin/
+        cp -f osmetrics-version.so /jet/var/mysqld/plugin/
