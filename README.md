@@ -72,7 +72,6 @@ Finally, you can login to MySQL and activate the plugins:
     | OS_DISKSTATS                | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskstats.so | GPL     |
     | OS_LOADAVG                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-loadavg.so   | GPL     |
     | OS_MEMORY                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-memory.so    | GPL     |
-    | OS_METRICS                  | ACTIVE   | INFORMATION SCHEMA | osmetrics.so           | GPL     |
     | OS_MISC                     | ACTIVE   | INFORMATION SCHEMA | osmetrics-misc.so      | GPL     |
     | OS_MOUNTS                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-mounts.so    | GPL     |
     | OS_NETWORK                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-network.so   | GPL     |
