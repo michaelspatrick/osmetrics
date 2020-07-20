@@ -13,7 +13,7 @@ Also keep in mind that my C programming skills are rusty and I am sure the code 
 
 Make sure you have the source code for MySQL and have done a cmake on it.  This will be necessary to compile the plugin.
 
-#### Compiling the Plugin
+#### Preparing the environment
 Below is the way that I compiled the plugin.  You will obviously need to make changes to match your environment.
 You will also need to have the Percona Server source code on your server:
 
@@ -32,7 +32,7 @@ I also had to add a few utilities:
     sudo yum install readline-devel
     cmake -DDOWNLOAD_BOOST=1 -DWITH_BOOST=.. 
     
-#### Plugin Installation
+#### Compiling the Plugins
 First, you will need to put the plugin code in the plugin directory of the source code you downloaded.  For me, this was "/home/ec2-user/percona-server-5.7.17-13/plugin" and I named the directory "osmetrics".  This directory contains the following files:
 
     includes  Makefile  osmetrics-cpu.c  osmetrics-cpuinfo.c  osmetrics-diskstats.c  osmetrics-loadavg.c  osmetrics-memory.c  osmetrics-misc.c  osmetrics-mounts.c  osmetrics-network.c  osmetrics-swaps.c  osmetrics-vmstat.c  README.md
@@ -53,6 +53,7 @@ You will then need to edit the Makefile and define this path there.  Once that i
     make
     make install
     
+#### Installing the Plugins
 Finally, you can login to MySQL and activate the plugins:
 
     mysql> INSTALL PLUGIN OS_CPU SONAME 'osmetrics-cpu.so';
@@ -86,6 +87,7 @@ Finally, you can login to MySQL and activate the plugins:
     | OS_VMSTAT                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-vmstat.so    | GPL     |
     +-----------------------------+----------+--------------------+------------------------+---------+
 
+#### Querying the Plugins
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPU;
     +---------------+---------------------+--------------------------------------------------------------------+
     | name          | value               | comment                                                            |
@@ -375,7 +377,7 @@ Finally, you can login to MySQL and activate the plugins:
     +------------+---------------------------+
     6 rows in set (0.00 sec)
 
-#### Plugin Uninstallation
+#### Uninstalling the Plugins
     mysql> UNINSTALL PLUGIN OS_CPU;
     mysql> UNINSTALL PLUGIN OS_CPUINFO;
     mysql> UNINSTALL PLUGIN OS_DISKSTATS;
