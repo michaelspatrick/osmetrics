@@ -83,7 +83,7 @@ Finally, you can login to MySQL and activate the plugins:
     | OS_MOUNTS                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-mounts.so    | GPL     |
     | OS_NETWORK                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-network.so   | GPL     |
     | OS_SWAPINFO                 | ACTIVE   | INFORMATION SCHEMA | osmetrics-swapinfo.so  | GPL     |
-    | OS_VERSION                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-version.so  | GPL     |
+    | OS_VERSION                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-version.so   | GPL     |
     | OS_VMSTAT                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-vmstat.so    | GPL     |
     +-----------------------------+----------+--------------------+------------------------+---------+
 
