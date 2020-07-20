@@ -227,7 +227,7 @@ Finally, you can login to MySQL and activate the plugins:
     +---------------+-------+--------------------------------------+
     5 rows in set (0.00 sec)
 
-    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_VMSTAT;;
+    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_VMSTAT;
     +---------------------------+----------+
     | name                      | value    |
     +---------------------------+----------+
