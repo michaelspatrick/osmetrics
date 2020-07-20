@@ -19,6 +19,10 @@ You will also need to have the Percona Server source code on your server:
 
     wget https://www.percona.com/downloads/Percona-Server-5.7/Percona-Server-5.7.17-13/source/tarball/percona-server-5.7.17-13.tar.gz
 
+Uncompress the file and go into the directory:
+    tar -zxvf percona-server-5.7.17-13.tar.gz
+    cd percona-server-5.7.17-13
+    
 I also had to add a few utilities:
 
     sudo yum install cmake
