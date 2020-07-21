@@ -47,7 +47,7 @@ osmetrics-diskstats.so: osmetrics-diskstats.c
 osmetrics-version.so: osmetrics-version.c
         $(CC) $(CFLAGS) -o osmetrics-version.so osmetrics-version.c
 
-osmetrics-version.so: osmetrics-diskscheduler.c
+osmetrics-diskscheduler.so: osmetrics-diskscheduler.c
         $(CC) $(CFLAGS) -o osmetrics-diskscheduler.so osmetrics-diskscheduler.c
         
 clean:
@@ -89,3 +89,31 @@ install:
         cp -f osmetrics-diskstats.so ${PLUGINDIR}
         cp -f osmetrics-version.so ${PLUGINDIR}
         cp -f osmetrics-diskscheduler.so ${PLUGINDIR}   
+        
+ ninstall:
+	rm -f ${PLUGINDIR}/osmetrics-cpu.so
+        rm -f ${PLUGINDIR}/osmetrics-network.so
+        rm -f ${PLUGINDIR}/osmetrics-loadavg.so
+        rm -f ${PLUGINDIR}/osmetrics-swapinfo.so
+        rm -f ${PLUGINDIR}/osmetrics-memory.so
+        rm -f ${PLUGINDIR}/osmetrics-vmstat.so
+        rm -f ${PLUGINDIR}/osmetrics-cpuinfo.so
+        rm -f ${PLUGINDIR}/osmetrics-mounts.so
+        rm -f ${PLUGINDIR}/osmetrics-misc.so
+        rm -f ${PLUGINDIR}/osmetrics-diskstats.so
+        rm -f ${PLUGINDIR}/osmetrics-version.so
+        rm -f ${PLUGINDIR}/osmetrics-diskscheduler.so
+
+distclean:
+        rm -f osmetrics-cpu.so
+        rm -f osmetrics-network.so
+        rm -f osmetrics-loadavg.so
+        rm -f osmetrics-swapinfo.so
+        rm -f osmetrics-memory.so
+        rm -f osmetrics-vmstat.so
+        rm -f osmetrics-cpuinfo.so
+        rm -f osmetrics-mounts.so
+        rm -f osmetrics-misc.so
+        rm -f osmetrics-diskstats.so
+        rm -f osmetrics-version.so
+        rm -f osmetrics-diskscheduler.so
