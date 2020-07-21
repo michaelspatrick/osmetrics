@@ -55,6 +55,7 @@ You will then need to edit the Makefile and define this path there.  Once that i
 Finally, you can login to MySQL and activate the plugins:
 
     mysql> INSTALL PLUGIN OS_CPU SONAME 'osmetrics-cpu.so';
+    mysql> INSTALL PLUGIN OS_CPUGOVERNOR SONAME 'osmetrics-cpugovernor.so';
     mysql> INSTALL PLUGIN OS_CPUINFO SONAME 'osmetrics-cpuinfo.so';
     mysql> INSTALL PLUGIN OS_IOSCHEDULER SONAME 'osmetrics-ioscheduler.so';
     mysql> INSTALL PLUGIN OS_DISKSTATS SONAME 'osmetrics-diskstats.so';
@@ -81,6 +82,7 @@ If all went well, you should see several new plugins available.  Just make sure 
     +-----------------------------+----------+--------------------+----------------------------+---------+
     ...
     | OS_CPU                      | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpu.so           | GPL     |
+    | OS_GOVERNOR                 | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpugovernor.so   | GPL     |
     | OS_CPUINFO                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpuinfo.so       | GPL     |
     | OS_DISKSTATS                | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskstats.so     | GPL     |
     | OS_IOSCHEDULER              | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskscheduler.so | GPL     |    
@@ -137,6 +139,14 @@ Let's look at example output from each of the plugins below:
     +---------------+---------------------+--------------------------------------------------------------------+
     32 rows in set (0.00 sec)
     
+    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPUGOVERNOR;
+    +--------+-------------+
+    | device | scheduler   |
+    +--------+-------------+
+    | cpu0   | performance |
+    +--------+-------------+
+    1 row in set (0.00 sec)
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPUINFO;
     +-----------+--------------+------------+-------+-------------------------------------------+----------+-----------+----------+------------+-------------+----------+---------+-----------+--------+----------------+-----+---------------+-------------+-----+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------+----------+--------------+-----------------+-----------------------------------+------------------+
     | processor | vendor_id    | cpu_family | model | model_name                                | stepping | microcode | cpu_MHz  | cache_size | physical_id | siblings | core_id | cpu_cores | apicid | initial_apicid | fpu | fpu_exception | cpuid_level | wp  | flags                                                                                                                                                                                                                                                                   | bugs                                                                               | bogomips | clflush_size | cache_alignment | address_sizes                     | power_management |
@@ -450,6 +460,7 @@ Let's look at example output from each of the plugins below:
 To uninstall the plugins, you can remove them with the following SQL commands.  To completely remove them, you will need to remove them from your plugin directory.
 
     mysql> UNINSTALL PLUGIN OS_CPU;
+    mysql> UNINSTALL PLUGIN OS_CPUGOVERNOR;
     mysql> UNINSTALL PLUGIN OS_CPUINFO;
     mysql> UNINSTALL PLUGIN OS_IOSCHEDULER;
     mysql> UNINSTALL PLUGIN OS_DISKSTATS;
