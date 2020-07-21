@@ -1,4 +1,4 @@
-PLUGINDIR="/jet/var/mysqld/plugin"
+PLUGINDIR=/jet/var/mysqld/plugin
 
 CC=g++
 CFLAGS=-DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
