@@ -33,9 +33,7 @@ I also had to add a few utilities:
     cmake -DDOWNLOAD_BOOST=1 -DWITH_BOOST=.. 
     
 #### Compiling the Plugins
-First, you will need to put the plugin code in the plugin directory of the source code you downloaded.  For me, this was "/home/ec2-user/percona-server-5.7.17-13/plugin" and I named the directory "osmetrics".  This directory contains the following files:
-
-    includes  Makefile  osmetrics-cpu.c  osmetrics-cpuinfo.c  os-diskscheduler.c  osmetrics-diskstats.c  osmetrics-loadavg.c  osmetrics-memory.c  osmetrics-misc.c  osmetrics-mounts.c  osmetrics-network.c  osmetrics-swaps.c  osmetrics-vmstat.c  README.md
+First, you will need to put the plugin code in the plugin directory of the source code you downloaded.  For me, this was "/home/ec2-user/percona-server-5.7.17-13/plugin" and I named the directory "osmetrics".  Of course, you can just do a "git" to retrieve this to your server or download as a zip file and decompress.  Just make sure it is placed into the "plugin" directory of the source code as noted above.
 
 Next, you will need to know where your MySQL plugin directory is located.  You can query that with the following SQL:
 
@@ -74,6 +72,8 @@ Alternatively, you can run the install SQL script:
     mysql> SOURCE /path/to/install_plugins.sql
 
 #### Verify Installation
+If all went well, you should see several new plugins available.  Just make sure the status is "ACTIVE."
+
     mysql> SHOW PLUGINS;
     +-----------------------------+----------+--------------------+----------------------------+---------+
     | Name                        | Status   | Type               | Library                    | License |
@@ -94,6 +94,8 @@ Alternatively, you can run the install SQL script:
     +-----------------------------+----------+--------------------+----------------------------+---------+
 
 #### Querying the Plugins
+Let's look at example output from each of the plugins below:
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPU;
     +---------------+---------------------+--------------------------------------------------------------------+
     | name          | value               | comment                                                            |
@@ -392,6 +394,8 @@ Alternatively, you can run the install SQL script:
     6 rows in set (0.00 sec)
 
 #### Uninstalling the Plugins
+To uninstall the plugins, you can remove them with the following SQL commands.  To completely remove them, you will need to remove them from your plugin directory.
+
     mysql> UNINSTALL PLUGIN OS_CPU;
     mysql> UNINSTALL PLUGIN OS_CPUINFO;
     mysql> UNINSTALL PLUGIN OS_DISKSCHEDULER;
@@ -408,3 +412,7 @@ Alternatively, you can run the install SQL script:
 Alternatively, you can run the uninstall SQL script:
 
     mysql> SOURCE /path/to/uninstall_plugins.sql
+    
+#### What's next?
+
+Who knows.  If there is enough interest, I would be happy to expand the plugins.  First, I need to do some more code cleanup and performance test them.  I do not expect them to have a significant performance impact, but one never knows until you test...
