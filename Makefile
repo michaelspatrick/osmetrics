@@ -12,7 +12,7 @@ CFLAGS=-DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
 -I./
 
 all: osmetrics-cpu.so osmetrics-network.so osmetrics-loadavg.so osmetrics-swapinfo.so osmetrics-memory.so osmetrics-vmstat.so osmetrics-cpuinfo.so osmetrics-mounts.so osmetrics-misc.so \
-     osmetrics-diskstats.so osmetrics-version.so osmetrics-diskscheduler.so
+     osmetrics-diskstats.so osmetrics-version.so osmetrics-diskscheduler.so osmetrics-meminfo.so
      
 osmetrics-cpu.so: osmetrics-cpu.c
         $(CC) $(CFLAGS) -o osmetrics-cpu.so osmetrics-cpu.c
@@ -49,7 +49,10 @@ osmetrics-version.so: osmetrics-version.c
 
 osmetrics-diskscheduler.so: osmetrics-diskscheduler.c
         $(CC) $(CFLAGS) -o osmetrics-diskscheduler.so osmetrics-diskscheduler.c
-        
+
+osmetrics-meminfo.so: osmetrics-meminfo.c
+        $(CC) $(CFLAGS) -o osmetrics-meminfo.so osmetrics-meminfo.c
+	
 clean:
       	rm -f ${PLUGINDIR}/osmetrics-cpu.so
         rm -f ${PLUGINDIR}/osmetrics-network.so
@@ -63,6 +66,7 @@ clean:
         rm -f ${PLUGINDIR}/osmetrics-diskstats.so
         rm -f ${PLUGINDIR}/osmetrics-version.so
         rm -f ${PLUGINDIR}/osmetrics-diskscheduler.so
+	rm -f ${PLUGINDIR}/osmetrics-meminfo.so
         rm -f osmetrics-cpu.so
         rm -f osmetrics-network.so
         rm -f osmetrics-loadavg.so
@@ -75,6 +79,7 @@ clean:
         rm -f osmetrics-diskstats.so
         rm -f osmetrics-version.so
         rm -f osmetrics-diskscheduler.so
+	rm -f osmetrics-meminfo.so
 
 install:
         cp -f osmetrics-cpu.so ${PLUGINDIR}
@@ -89,7 +94,8 @@ install:
         cp -f osmetrics-diskstats.so ${PLUGINDIR}
         cp -f osmetrics-version.so ${PLUGINDIR}
         cp -f osmetrics-diskscheduler.so ${PLUGINDIR}   
-        
+        cp -f osmetrics-meminfo.so ${PLUGINDIR}
+	
 uninstall:
 	rm -f ${PLUGINDIR}/osmetrics-cpu.so
         rm -f ${PLUGINDIR}/osmetrics-network.so
@@ -103,7 +109,8 @@ uninstall:
         rm -f ${PLUGINDIR}/osmetrics-diskstats.so
         rm -f ${PLUGINDIR}/osmetrics-version.so
         rm -f ${PLUGINDIR}/osmetrics-diskscheduler.so
-
+	rm -f ${PLUGINDIR}/osmetrics-meminfo.so
+	
 distclean:
         rm -f osmetrics-cpu.so
         rm -f osmetrics-network.so
@@ -117,3 +124,4 @@ distclean:
         rm -f osmetrics-diskstats.so
         rm -f osmetrics-version.so
         rm -f osmetrics-diskscheduler.so
+	rm -f osmetrics-meminfo.so
