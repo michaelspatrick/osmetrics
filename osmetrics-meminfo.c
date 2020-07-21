@@ -92,7 +92,15 @@ static int osmetrics_meminfo_fill_table(THD *thd, TABLE_LIST *tables, Item *cond
       for (i=2; (unsigned int)i< strlen(pos); i++) strncat(val, &pos[i], 1);
 
       table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-      table->field[1]->store(val, strlen(val), system_charset_info);
+      int found = strpos((char*)val, (char*)"kB")-1;
+      if (found > 0) {
+	char newstr[256]="";
+        for (int i=0; i<found; i++) strncat(newstr, &val[i], 1);
+        unsigned int newval=atoi(newstr) * 1024;
+        table->field[1]->store(newval);
+      } else {
+        table->field[1]->store(atoi(val));
+      }
       if (schema_table_store_record(thd, table)) return 1;
     }
   }
