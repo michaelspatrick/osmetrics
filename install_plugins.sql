@@ -1,0 +1,12 @@
+INSTALL PLUGIN OS_CPU SONAME 'osmetrics-cpu.so';
+INSTALL PLUGIN OS_CPUINFO SONAME 'osmetrics-cpuinfo.so';
+INSTALL PLUGIN OS_DISKSCHEDULER SONAME 'osmetrics-diskscheduler.so';
+INSTALL PLUGIN OS_DISKSTATS SONAME 'osmetrics-diskstats.so';
+INSTALL PLUGIN OS_LOADAVG SONAME 'osmetrics-loadavg.so';
+INSTALL PLUGIN OS_MEMORY SONAME 'osmetrics-memory.so';
+INSTALL PLUGIN OS_MISC SONAME 'osmetrics-misc.so';
+INSTALL PLUGIN OS_MOUNTS SONAME 'osmetrics-mounts.so';
+INSTALL PLUGIN OS_NETWORK SONAME 'osmetrics-network.so';
+INSTALL PLUGIN OS_SWAPINFO SONAME 'osmetrics-swapinfo.so';
+INSTALL PLUGIN OS_VERSION SONAME 'osmetrics-version.so';    
+INSTALL PLUGIN OS_VMSTAT SONAME 'osmetrics-vmstat.so';
