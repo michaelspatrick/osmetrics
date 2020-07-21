@@ -35,7 +35,7 @@ I also had to add a few utilities:
 #### Compiling the Plugins
 First, you will need to put the plugin code in the plugin directory of the source code you downloaded.  For me, this was "/home/ec2-user/percona-server-5.7.17-13/plugin" and I named the directory "osmetrics".  This directory contains the following files:
 
-    includes  Makefile  osmetrics-cpu.c  osmetrics-cpuinfo.c  osmetrics-diskstats.c  osmetrics-loadavg.c  osmetrics-memory.c  osmetrics-misc.c  osmetrics-mounts.c  osmetrics-network.c  osmetrics-swaps.c  osmetrics-vmstat.c  README.md
+    includes  Makefile  osmetrics-cpu.c  osmetrics-cpuinfo.c  os-diskscheduler.c  osmetrics-diskstats.c  osmetrics-loadavg.c  osmetrics-memory.c  osmetrics-misc.c  osmetrics-mounts.c  osmetrics-network.c  osmetrics-swaps.c  osmetrics-vmstat.c  README.md
 
 Next, you will need to know where your MySQL plugin directory is located.  You can query that with the following SQL:
 
