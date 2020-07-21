@@ -68,6 +68,10 @@ Finally, you can login to MySQL and activate the plugins:
     mysql> INSTALL PLUGIN OS_SWAPINFO SONAME 'osmetrics-swapinfo.so';
     mysql> INSTALL PLUGIN OS_VERSION SONAME 'osmetrics-version.so';    
     mysql> INSTALL PLUGIN OS_VMSTAT SONAME 'osmetrics-vmstat.so';
+    
+Alternatively, you can run the install SQL script:
+
+    mysql> SOURCE /path/to/install_plugins.sql
 
 #### Verify Installation
     mysql> SHOW PLUGINS;
@@ -400,3 +404,7 @@ Finally, you can login to MySQL and activate the plugins:
     mysql> UNINSTALL PLUGIN OS_SWAPINFO;
     mysql> UNINSTALL PLUGIN OS_VERSION;
     mysql> UNINSTALL PLUGIN OS_VMSTAT;
+
+Alternatively, you can run the uninstall SQL script:
+
+    mysql> SOURCE /path/to/uninstall_plugins.sql
