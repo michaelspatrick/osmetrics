@@ -1,4 +1,5 @@
 INSTALL PLUGIN OS_CPU SONAME 'osmetrics-cpu.so';
+INSTALL PLUGIN OS_CPUGOVERNOR SONAME 'osmetrics-cpugovernor.so';
 INSTALL PLUGIN OS_CPUINFO SONAME 'osmetrics-cpuinfo.so';
 INSTALL PLUGIN OS_IOSCHEDULER SONAME 'osmetrics-ioscheduler.so';
 INSTALL PLUGIN OS_DISKSTATS SONAME 'osmetrics-diskstats.so';
