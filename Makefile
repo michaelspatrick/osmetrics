@@ -90,7 +90,7 @@ install:
         cp -f osmetrics-version.so ${PLUGINDIR}
         cp -f osmetrics-diskscheduler.so ${PLUGINDIR}   
         
- ninstall:
+uninstall:
 	rm -f ${PLUGINDIR}/osmetrics-cpu.so
         rm -f ${PLUGINDIR}/osmetrics-network.so
         rm -f ${PLUGINDIR}/osmetrics-loadavg.so
