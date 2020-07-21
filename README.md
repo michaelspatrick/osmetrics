@@ -56,7 +56,7 @@ Finally, you can login to MySQL and activate the plugins:
 
     mysql> INSTALL PLUGIN OS_CPU SONAME 'osmetrics-cpu.so';
     mysql> INSTALL PLUGIN OS_CPUINFO SONAME 'osmetrics-cpuinfo.so';
-    mysql> INSTALL PLUGIN OS_DISKSCHEDULER SONAME 'osmetrics-diskscheduler.so';
+    mysql> INSTALL PLUGIN OS_IOSCHEDULER SONAME 'osmetrics-ioscheduler.so';
     mysql> INSTALL PLUGIN OS_DISKSTATS SONAME 'osmetrics-diskstats.so';
     mysql> INSTALL PLUGIN OS_LOADAVG SONAME 'osmetrics-loadavg.so';
     mysql> INSTALL PLUGIN OS_MEMINFO SONAME 'osmetrics-meminfo.so';
@@ -82,8 +82,8 @@ If all went well, you should see several new plugins available.  Just make sure 
     ...
     | OS_CPU                      | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpu.so           | GPL     |
     | OS_CPUINFO                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpuinfo.so       | GPL     |
-    | OS_DISKSCHEDULER            | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskscheduler.so | GPL     |    
     | OS_DISKSTATS                | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskstats.so     | GPL     |
+    | OS_IOSCHEDULER              | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskscheduler.so | GPL     |    
     | OS_LOADAVG                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-loadavg.so       | GPL     |
     | OS_MEMINFO                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-meminfo.so       | GPL     |
     | OS_MEMORY                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-memory.so        | GPL     |
@@ -145,7 +145,7 @@ Let's look at example output from each of the plugins below:
     +-----------+--------------+------------+-------+-------------------------------------------+----------+-----------+----------+------------+-------------+----------+---------+-----------+--------+----------------+-----+---------------+-------------+-----+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------+----------+--------------+-----------------+-----------------------------------+------------------+
     1 row in set (0.00 sec)
 
-    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_DISKSCHEDULER;
+    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_IOSCHEDULER;
     +--------+-----------+
     | device | scheduler |
     +--------+-----------+
@@ -451,7 +451,7 @@ To uninstall the plugins, you can remove them with the following SQL commands.  
 
     mysql> UNINSTALL PLUGIN OS_CPU;
     mysql> UNINSTALL PLUGIN OS_CPUINFO;
-    mysql> UNINSTALL PLUGIN OS_DISKSCHEDULER;
+    mysql> UNINSTALL PLUGIN OS_IOSCHEDULER;
     mysql> UNINSTALL PLUGIN OS_DISKSTATS;
     mysql> UNINSTALL PLUGIN OS_LOADAVG;
     mysql> UNINSTALL PLUGIN OS_MEMINFO;
