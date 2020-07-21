@@ -59,6 +59,7 @@ Finally, you can login to MySQL and activate the plugins:
     mysql> INSTALL PLUGIN OS_DISKSCHEDULER SONAME 'osmetrics-diskscheduler.so';
     mysql> INSTALL PLUGIN OS_DISKSTATS SONAME 'osmetrics-diskstats.so';
     mysql> INSTALL PLUGIN OS_LOADAVG SONAME 'osmetrics-loadavg.so';
+    mysql> INSTALL PLUGIN OS_MEMINFO SONAME 'osmetrics-meminfo.so';
     mysql> INSTALL PLUGIN OS_MEMORY SONAME 'osmetrics-memory.so';
     mysql> INSTALL PLUGIN OS_MISC SONAME 'osmetrics-misc.so';
     mysql> INSTALL PLUGIN OS_MOUNTS SONAME 'osmetrics-mounts.so';
@@ -84,6 +85,7 @@ If all went well, you should see several new plugins available.  Just make sure 
     | OS_DISKSCHEDULER            | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskscheduler.so | GPL     |    
     | OS_DISKSTATS                | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskstats.so     | GPL     |
     | OS_LOADAVG                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-loadavg.so       | GPL     |
+    | OS_MEMINFO                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-meminfo.so       | GPL     |
     | OS_MEMORY                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-memory.so        | GPL     |
     | OS_MISC                     | ACTIVE   | INFORMATION SCHEMA | osmetrics-misc.so          | GPL     |
     | OS_MOUNTS                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-mounts.so        | GPL     |
@@ -170,6 +172,57 @@ Let's look at example output from each of the plugins below:
     | 15_min |     0 | 15 minute load average |
     +--------+-------+------------------------+
     3 rows in set (0.00 sec)
+    
+    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_MEMINFO;
+    +-----------------+----------------+
+    | name            | value          |
+    +-----------------+----------------+
+    | MemTotal        | 2041328 kB     |
+    | MemFree         | 1615616 kB     |
+    | MemAvailable    | 1717676 kB     |
+    | Buffers         | 22472 kB       |
+    | Cached          | 201380 kB      |
+    | SwapCached      | 0 kB           |
+    | Active          | 281308 kB      |
+    | Inactive        | 98964 kB       |
+    | Active(anon)    | 155388 kB      |
+    | Inactive(anon)  | 52 kB          |
+    | Active(file)    | 125920 kB      |
+    | Inactive(file)  | 98912 kB       |
+    | Unevictable     | 0 kB           |
+    | Mlocked         | 0 kB           |
+    | SwapTotal       | 0 kB           |
+    | SwapFree        | 0 kB           |
+    | Dirty           | 28 kB          |
+    | Writeback       | 0 kB           |
+    | AnonPages       | 156412 kB      |
+    | Mapped          | 53164 kB       |
+    | Shmem           | 64 kB          |
+    | Slab            | 28620 kB       |
+    | SReclaimable    | 17848 kB       |
+    | SUnreclaim      | 10772 kB       |
+    | KernelStack     | 2176 kB        |
+    | PageTables      | 3960 kB        |
+    | NFS_Unstable    | 0 kB           |
+    | Bounce          | 0 kB           |
+    | WritebackTmp    | 0 kB           |
+    | CommitLimit     | 1020664 kB     |
+    | Committed_AS    | 758228 kB      |
+    | VmallocTotal    | 34359738367 kB |
+    | VmallocUsed     | 0 kB           |
+    | VmallocChunk    | 0 kB           |
+    | AnonHugePages   | 0 kB           |
+    | ShmemHugePages  | 0 kB           |
+    | ShmemPmdMapped  | 0 kB           |
+    | HugePages_Total | 0              |
+    | HugePages_Free  | 0              |
+    | HugePages_Rsvd  | 0              |
+    | HugePages_Surp  | 0              |
+    | Hugepagesize    | 2048 kB        |
+    | DirectMap4k     | 53248 kB       |
+    | DirectMap2M     | 2043904 kB     |
+    +-----------------+----------------+
+    44 rows in set (0.00 sec)
     
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_MEMORY;
     +----------------+-----------------------+--------------------------------------+
@@ -401,6 +454,7 @@ To uninstall the plugins, you can remove them with the following SQL commands.  
     mysql> UNINSTALL PLUGIN OS_DISKSCHEDULER;
     mysql> UNINSTALL PLUGIN OS_DISKSTATS;
     mysql> UNINSTALL PLUGIN OS_LOADAVG;
+    mysql> UNINSTALL PLUGIN OS_MEMINFO;
     mysql> UNINSTALL PLUGIN OS_MEMORY;
     mysql> UNINSTALL PLUGIN OS_MISC;
     mysql> UNINSTALL PLUGIN OS_MOUNTS;
