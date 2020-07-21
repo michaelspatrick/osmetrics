@@ -141,7 +141,7 @@ Let's look at example output from each of the plugins below:
     
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPUGOVERNOR;
     +--------+-------------+
-    | device | scheduler   |
+    | name   | governor    |
     +--------+-------------+
     | cpu0   | performance |
     +--------+-------------+
