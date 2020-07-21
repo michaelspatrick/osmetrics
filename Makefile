@@ -12,7 +12,7 @@ CFLAGS=-DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
 -I./
 
 all: osmetrics-cpu.so osmetrics-network.so osmetrics-loadavg.so osmetrics-swapinfo.so osmetrics-memory.so osmetrics-vmstat.so osmetrics-cpuinfo.so osmetrics-mounts.so osmetrics-misc.so \
-     osmetrics-diskstats.so osmetrics-version.so osmetrics-diskscheduler.so osmetrics-meminfo.so
+     osmetrics-diskstats.so osmetrics-version.so osmetrics-ioscheduler.so osmetrics-meminfo.so
      
 osmetrics-cpu.so: osmetrics-cpu.c
         $(CC) $(CFLAGS) -o osmetrics-cpu.so osmetrics-cpu.c
@@ -47,8 +47,8 @@ osmetrics-diskstats.so: osmetrics-diskstats.c
 osmetrics-version.so: osmetrics-version.c
         $(CC) $(CFLAGS) -o osmetrics-version.so osmetrics-version.c
 
-osmetrics-diskscheduler.so: osmetrics-diskscheduler.c
-        $(CC) $(CFLAGS) -o osmetrics-diskscheduler.so osmetrics-diskscheduler.c
+osmetrics-ioscheduler.so: osmetrics-ioscheduler.c
+        $(CC) $(CFLAGS) -o osmetrics-ioscheduler.so osmetrics-ioscheduler.c
 
 osmetrics-meminfo.so: osmetrics-meminfo.c
         $(CC) $(CFLAGS) -o osmetrics-meminfo.so osmetrics-meminfo.c
@@ -65,7 +65,7 @@ clean:
         rm -f ${PLUGINDIR}/osmetrics-misc.so
         rm -f ${PLUGINDIR}/osmetrics-diskstats.so
         rm -f ${PLUGINDIR}/osmetrics-version.so
-        rm -f ${PLUGINDIR}/osmetrics-diskscheduler.so
+        rm -f ${PLUGINDIR}/osmetrics-ioscheduler.so
 	rm -f ${PLUGINDIR}/osmetrics-meminfo.so
         rm -f osmetrics-cpu.so
         rm -f osmetrics-network.so
@@ -78,7 +78,7 @@ clean:
         rm -f osmetrics-misc.so
         rm -f osmetrics-diskstats.so
         rm -f osmetrics-version.so
-        rm -f osmetrics-diskscheduler.so
+        rm -f osmetrics-ioscheduler.so
 	rm -f osmetrics-meminfo.so
 
 install:
@@ -93,7 +93,7 @@ install:
         cp -f osmetrics-misc.so ${PLUGINDIR}
         cp -f osmetrics-diskstats.so ${PLUGINDIR}
         cp -f osmetrics-version.so ${PLUGINDIR}
-        cp -f osmetrics-diskscheduler.so ${PLUGINDIR}   
+        cp -f osmetrics-ioscheduler.so ${PLUGINDIR}   
         cp -f osmetrics-meminfo.so ${PLUGINDIR}
 	
 uninstall:
@@ -108,7 +108,7 @@ uninstall:
         rm -f ${PLUGINDIR}/osmetrics-misc.so
         rm -f ${PLUGINDIR}/osmetrics-diskstats.so
         rm -f ${PLUGINDIR}/osmetrics-version.so
-        rm -f ${PLUGINDIR}/osmetrics-diskscheduler.so
+        rm -f ${PLUGINDIR}/osmetrics-ioscheduler.so
 	rm -f ${PLUGINDIR}/osmetrics-meminfo.so
 	
 distclean:
@@ -123,5 +123,5 @@ distclean:
         rm -f osmetrics-misc.so
         rm -f osmetrics-diskstats.so
         rm -f osmetrics-version.so
-        rm -f osmetrics-diskscheduler.so
+        rm -f osmetrics-ioscheduler.so
 	rm -f osmetrics-meminfo.so
