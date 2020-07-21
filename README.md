@@ -58,6 +58,7 @@ Finally, you can login to MySQL and activate the plugins:
 
     mysql> INSTALL PLUGIN OS_CPU SONAME 'osmetrics-cpu.so';
     mysql> INSTALL PLUGIN OS_CPUINFO SONAME 'osmetrics-cpuinfo.so';
+    mysql> INSTALL PLUGIN OS_DISKSCHEDULER SONAME 'osmetrics-diskscheduler.so';
     mysql> INSTALL PLUGIN OS_DISKSTATS SONAME 'osmetrics-diskstats.so';
     mysql> INSTALL PLUGIN OS_LOADAVG SONAME 'osmetrics-loadavg.so';
     mysql> INSTALL PLUGIN OS_MEMORY SONAME 'osmetrics-memory.so';
@@ -70,22 +71,23 @@ Finally, you can login to MySQL and activate the plugins:
 
 #### Verify Installation
     mysql> SHOW PLUGINS;
-    +-----------------------------+----------+--------------------+------------------------+---------+
-    | Name                        | Status   | Type               | Library                | License |
-    +-----------------------------+----------+--------------------+------------------------+---------+
+    +-----------------------------+----------+--------------------+----------------------------+---------+
+    | Name                        | Status   | Type               | Library                    | License |
+    +-----------------------------+----------+--------------------+----------------------------+---------+
     ...
-    | OS_CPU                      | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpu.so       | GPL     |
-    | OS_CPUINFO                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpuinfo.so   | GPL     |
-    | OS_DISKSTATS                | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskstats.so | GPL     |
-    | OS_LOADAVG                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-loadavg.so   | GPL     |
-    | OS_MEMORY                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-memory.so    | GPL     |
-    | OS_MISC                     | ACTIVE   | INFORMATION SCHEMA | osmetrics-misc.so      | GPL     |
-    | OS_MOUNTS                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-mounts.so    | GPL     |
-    | OS_NETWORK                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-network.so   | GPL     |
-    | OS_SWAPINFO                 | ACTIVE   | INFORMATION SCHEMA | osmetrics-swapinfo.so  | GPL     |
-    | OS_VERSION                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-version.so   | GPL     |
-    | OS_VMSTAT                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-vmstat.so    | GPL     |
-    +-----------------------------+----------+--------------------+------------------------+---------+
+    | OS_CPU                      | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpu.so           | GPL     |
+    | OS_CPUINFO                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-cpuinfo.so       | GPL     |
+    | OS_DISKSCHEDULER            | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskscheduler.so | GPL     |    
+    | OS_DISKSTATS                | ACTIVE   | INFORMATION SCHEMA | osmetrics-diskstats.so     | GPL     |
+    | OS_LOADAVG                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-loadavg.so       | GPL     |
+    | OS_MEMORY                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-memory.so        | GPL     |
+    | OS_MISC                     | ACTIVE   | INFORMATION SCHEMA | osmetrics-misc.so          | GPL     |
+    | OS_MOUNTS                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-mounts.so        | GPL     |
+    | OS_NETWORK                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-network.so       | GPL     |
+    | OS_SWAPINFO                 | ACTIVE   | INFORMATION SCHEMA | osmetrics-swapinfo.so      | GPL     |
+    | OS_VERSION                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-version.so       | GPL     |
+    | OS_VMSTAT                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-vmstat.so        | GPL     |
+    +-----------------------------+----------+--------------------+----------------------------+---------+
 
 #### Querying the Plugins
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPU;
@@ -135,6 +137,14 @@ Finally, you can login to MySQL and activate the plugins:
     +-----------+--------------+------------+-------+-------------------------------------------+----------+-----------+----------+------------+-------------+----------+---------+-----------+--------+----------------+-----+---------------+-------------+-----+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------+----------+--------------+-----------------+-----------------------------------+------------------+
     1 row in set (0.00 sec)
 
+    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_DISKSCHEDULER;
+    +--------+-----------+
+    | device | scheduler |
+    +--------+-----------+
+    | xvda   | [noop]    |
+    +--------+-----------+
+    1 row in set (0.00 sec)
+    
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_DISKSTATS;
     +-----------+-----------+--------+---------------+--------------+--------------+---------------+----------------+---------------+-----------------+----------------+-----------------+------------------+---------------------------+
     | major_num | minor_num | device | reads_success | reads_merged | sectors_read | time_reads_ms | writes_success | writes_merged | sectors_written | time_writes_ms | ios_in_progress | time_doing_io_ms | weighted_time_doing_io_ms |
@@ -380,6 +390,7 @@ Finally, you can login to MySQL and activate the plugins:
 #### Uninstalling the Plugins
     mysql> UNINSTALL PLUGIN OS_CPU;
     mysql> UNINSTALL PLUGIN OS_CPUINFO;
+    mysql> UNINSTALL PLUGIN OS_DISKSCHEDULER;
     mysql> UNINSTALL PLUGIN OS_DISKSTATS;
     mysql> UNINSTALL PLUGIN OS_LOADAVG;
     mysql> UNINSTALL PLUGIN OS_MEMORY;
