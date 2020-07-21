@@ -174,54 +174,54 @@ Let's look at example output from each of the plugins below:
     3 rows in set (0.00 sec)
     
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_MEMINFO;
-    +-----------------+----------------+
-    | name            | value          |
-    +-----------------+----------------+
-    | MemTotal        | 2041328 kB     |
-    | MemFree         | 1615616 kB     |
-    | MemAvailable    | 1717676 kB     |
-    | Buffers         | 22472 kB       |
-    | Cached          | 201380 kB      |
-    | SwapCached      | 0 kB           |
-    | Active          | 281308 kB      |
-    | Inactive        | 98964 kB       |
-    | Active(anon)    | 155388 kB      |
-    | Inactive(anon)  | 52 kB          |
-    | Active(file)    | 125920 kB      |
-    | Inactive(file)  | 98912 kB       |
-    | Unevictable     | 0 kB           |
-    | Mlocked         | 0 kB           |
-    | SwapTotal       | 0 kB           |
-    | SwapFree        | 0 kB           |
-    | Dirty           | 28 kB          |
-    | Writeback       | 0 kB           |
-    | AnonPages       | 156412 kB      |
-    | Mapped          | 53164 kB       |
-    | Shmem           | 64 kB          |
-    | Slab            | 28620 kB       |
-    | SReclaimable    | 17848 kB       |
-    | SUnreclaim      | 10772 kB       |
-    | KernelStack     | 2176 kB        |
-    | PageTables      | 3960 kB        |
-    | NFS_Unstable    | 0 kB           |
-    | Bounce          | 0 kB           |
-    | WritebackTmp    | 0 kB           |
-    | CommitLimit     | 1020664 kB     |
-    | Committed_AS    | 758228 kB      |
-    | VmallocTotal    | 34359738367 kB |
-    | VmallocUsed     | 0 kB           |
-    | VmallocChunk    | 0 kB           |
-    | AnonHugePages   | 0 kB           |
-    | ShmemHugePages  | 0 kB           |
-    | ShmemPmdMapped  | 0 kB           |
-    | HugePages_Total | 0              |
-    | HugePages_Free  | 0              |
-    | HugePages_Rsvd  | 0              |
-    | HugePages_Surp  | 0              |
-    | Hugepagesize    | 2048 kB        |
-    | DirectMap4k     | 53248 kB       |
-    | DirectMap2M     | 2043904 kB     |
-    +-----------------+----------------+
+    +-----------------+------------+
+    | name            | value      |
+    +-----------------+------------+
+    | MemTotal        | 2090319872 |
+    | MemFree         | 1658920960 |
+    | MemAvailable    | 1762938880 |
+    | Buffers         |   22573056 |
+    | Cached          |  206209024 |
+    | SwapCached      |          0 |
+    | Active          |  284999680 |
+    | Inactive        |  100868096 |
+    | Active(anon)    |  156110848 |
+    | Inactive(anon)  |      53248 |
+    | Active(file)    |  128888832 |
+    | Inactive(file)  |  100814848 |
+    | Unevictable     |          0 |
+    | Mlocked         |          0 |
+    | SwapTotal       |          0 |
+    | SwapFree        |          0 |
+    | Dirty           |     811008 |
+    | Writeback       |          0 |
+    | AnonPages       |  157085696 |
+    | Mapped          |   53223424 |
+    | Shmem           |      65536 |
+    | Slab            |   29102080 |
+    | SReclaimable    |   18337792 |
+    | SUnreclaim      |   10764288 |
+    | KernelStack     |    2162688 |
+    | PageTables      |    3444736 |
+    | NFS_Unstable    |          0 |
+    | Bounce          |          0 |
+    | WritebackTmp    |          0 |
+    | CommitLimit     | 1045159936 |
+    | Committed_AS    |  770662400 |
+    | VmallocTotal    | 4294966272 |
+    | VmallocUsed     |          0 |
+    | VmallocChunk    |          0 |
+    | AnonHugePages   |          0 |
+    | ShmemHugePages  |          0 |
+    | ShmemPmdMapped  |          0 |
+    | HugePages_Total |          0 |
+    | HugePages_Free  |          0 |
+    | HugePages_Rsvd  |          0 |
+    | HugePages_Surp  |          0 |
+    | Hugepagesize    |    2097152 |
+    | DirectMap4k     |   60817408 |
+    | DirectMap2M     | 2086666240 |
+    +-----------------+------------+
     44 rows in set (0.00 sec)
     
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_MEMORY;
