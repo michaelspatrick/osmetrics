@@ -24,6 +24,13 @@
 
 extern char *mysql_data_home;
 
+char* strip_newlines(char* szX) {
+    int i = strlen(szX);
+    while('\n'==szX[--i]) szX[i] = 0;
+    while('\r'==szX[--i]) szX[i] = 0;
+    return szX;
+}
+
 static struct st_mysql_information_schema osmetrics_diskscheduler_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 
 static ST_FIELD_INFO osmetrics_diskscheduler_table_fields[]=
@@ -52,12 +59,12 @@ static int osmetrics_diskscheduler_fill_table(THD *thd, TABLE_LIST *tables, Item
         strcat(filename, "/queue/scheduler");
 
         FILE *fp = fopen(filename, "r");
-        fscanf(fp, "%s", buffer);
+        fgets(buffer, 256, fp);
+        strcpy(buffer, strip_newlines(buffer));
 
         table->field[0]->store(entry->d_name, strlen(entry->d_name), system_charset_info);
         table->field[1]->store(buffer, strlen(buffer), system_charset_info);
         if (schema_table_store_record(thd, table)) return 1;
-        puts(buffer);
       }
     }
     closedir(dp);
