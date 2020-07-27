@@ -12,7 +12,6 @@
 #include <sys/resource.h>
 #include <sys/sysinfo.h>
 #include <sys/statvfs.h>
-//#include <sys/utsname.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netdb.h>
@@ -37,9 +36,6 @@ static int osmetrics_misc_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   struct sysinfo info;
   TABLE *table= tables->table;
   struct statvfs disk;
-  //struct utsname uts;
-  //struct ifaddrs *ifaddr, *ifa;
-  //int family, n;
   char fieldname[50];
   char comment[100];
 
@@ -113,19 +109,16 @@ static int osmetrics_misc_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 
-  //char line[256];
+  // Swappiness
   FILE* fp = fopen("/proc/sys/vm/swappiness", "r");
   int swappiness;
   assert(fp != NULL);
-  //while (fgets(line, sizeof(line), fp)) {
-    //sscanf( line, "%d", swappiness);
-    strcpy(comment, "Swappiness setting");
-    fscanf( fp, "%d", &swappiness);
-    table->field[0]->store("swappiness", strlen("swappiness"), system_charset_info);
-    table->field[1]->store((int)swappiness);
-    table->field[2]->store(comment, strlen(comment), system_charset_info);
-    if (schema_table_store_record(thd, table)) return 1;
-  //}
+  strcpy(comment, "Swappiness setting");
+  fscanf( fp, "%d", &swappiness);
+  table->field[0]->store("swappiness", strlen("swappiness"), system_charset_info);
+  table->field[1]->store((int)swappiness);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
   fclose(fp);
 
   return 0;
@@ -142,17 +135,17 @@ static int osmetrics_misc_table_init(void *ptr)
 mysql_declare_plugin(os_metrics)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_misc_table_info,                /* type-specific descriptor */
-  "OS_MISC",                      /* table name */
-  "Michael Patrick",                 /* author */
-  "OS Metrics Misc INFORMATION_SCHEMA table", /* description */
-  PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_misc_table_init,                 /* init function */
+  &osmetrics_misc_table_info,                 /* type-specific descriptor */
+  "OS_MISC",                                  /* table name */
+  "Michael Patrick",                          /* author */
+  "OS Metrics: Misc Info",                    /* description */
+  PLUGIN_LICENSE_GPL,                         /* license type */
+  osmetrics_misc_table_init,                  /* init function */
   NULL,
-  0x0100,                            /* version = 1.0 */
-  NULL,                              /* no status variables */
-  NULL,                              /* no system variables */
-  NULL,                              /* no reserved information */
-  0                                  /* no flags */
+  0x0100,                                     /* version = 1.0 */
+  NULL,                                       /* no status variables */
+  NULL,                                       /* no system variables */
+  NULL,                                       /* no reserved information */
+  0                                           /* no flags */
 }
 mysql_declare_plugin_end;

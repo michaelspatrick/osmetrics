@@ -371,12 +371,12 @@ static int osmetrics_cpu_table_init(void *ptr)
 mysql_declare_plugin(osmetrics_cpu_plugin)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_cpu_table_info,            	/* type-specific descriptor */
-  "OS_CPU",                      		/* table name */
+  &osmetrics_cpu_table_info,           	/* type-specific descriptor */
+  "OS_CPU",                          		/* table name */
   "Michael Patrick",                 		/* author */
-  "OS Metrics CPU INFORMATION_SCHEMA table", 	/* description */
+  "OS Metrics: CPU Details",          	/* description */
   PLUGIN_LICENSE_GPL,                		/* license type */
-  osmetrics_cpu_table_init,                 	/* init function */
+  osmetrics_cpu_table_init,           	/* init function */
   NULL,
   0x0001,                            		/* version = 0.1 */
   NULL,                              		/* no status variables */

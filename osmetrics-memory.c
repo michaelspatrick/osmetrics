@@ -7,7 +7,6 @@
 #include <mysql_version.h>
 #include <mysql/plugin.h>
 #include <my_global.h>
-//#include <includes/getmem.h>
 #include <includes/getcpu.h>
 #include <sys/time.h>
 #include <sys/resource.h>
@@ -189,17 +188,17 @@ static int osmetrics_memory_table_init(void *ptr)
 mysql_declare_plugin(os_memory)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_memory_table_info,                /* type-specific descriptor */
-  "OS_MEMORY",                      /* table name */
-  "Michael Patrick",                 /* author */
-  "OS Metrics Memory INFORMATION_SCHEMA table", /* description */
-  PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_memory_table_init,                 /* init function */
+  &osmetrics_memory_table_info,                 /* type-specific descriptor */
+  "OS_MEMORY",                                  /* table name */
+  "Michael Patrick",                            /* author */
+  "OS Metrics: Memory Details",                 /* description */
+  PLUGIN_LICENSE_GPL,                           /* license type */
+  osmetrics_memory_table_init,                  /* init function */
   NULL,
-  0x0001,                            /* version = 0.1 */
-  NULL,                              /* no status variables */
-  NULL,                              /* no system variables */
-  NULL,                              /* no reserved information */
-  0                                  /* no flags */
+  0x0001,                                       /* version = 0.1 */
+  NULL,                                         /* no status variables */
+  NULL,                                         /* no system variables */
+  NULL,                                         /* no reserved information */
+  0                                             /* no flags */
 }
 mysql_declare_plugin_end;

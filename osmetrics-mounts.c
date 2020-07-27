@@ -62,12 +62,12 @@ static int osmetrics_mounts_table_init(void *ptr)
 mysql_declare_plugin(osmetrics_mounts)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_mounts_table_info,                /* type-specific descriptor */
-  "OS_MOUNTS",                      /* table name */
+  &osmetrics_mounts_table_info,      /* type-specific descriptor */
+  "OS_MOUNTS",                       /* table name */
   "Michael Patrick",                 /* author */
-  "OS metrics from /proc/mounts", /* description */
+  "OS Metrics: Filesystem Mounts",   /* description */
   PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_mounts_table_init,                 /* init function */
+  osmetrics_mounts_table_init,       /* init function */
   NULL,
   0x0001,                            /* version = 0.1 */
   NULL,                              /* no status variables */

@@ -83,17 +83,17 @@ static int osmetrics_ioscheduler_table_init(void *ptr)
 mysql_declare_plugin(os_metrics_ioscheduler)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_ioscheduler_table_info,                /* type-specific descriptor */
-  "OS_IOSCHEDULER",                      /* table name */
-  "Michael Patrick",                 /* author */
-  "OS Metrics Disk Scheduler INFORMATION_SCHEMA table", /* description */
-  PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_ioscheduler_table_init,                 /* init function */
+  &osmetrics_ioscheduler_table_info,  /* type-specific descriptor */
+  "OS_IOSCHEDULER",                   /* table name */
+  "Michael Patrick",                  /* author */
+  "OS Metrics: Disk Scheduler",       /* description */
+  PLUGIN_LICENSE_GPL,                 /* license type */
+  osmetrics_ioscheduler_table_init,   /* init function */
   NULL,
-  0x0001,                            /* version = 0.1 */
-  NULL,                              /* no status variables */
-  NULL,                              /* no system variables */
-  NULL,                              /* no reserved information */
-  0                                  /* no flags */
+  0x0001,                             /* version = 0.1 */
+  NULL,                               /* no status variables */
+  NULL,                               /* no system variables */
+  NULL,                               /* no reserved information */
+  0                                   /* no flags */
 }
 mysql_declare_plugin_end;
