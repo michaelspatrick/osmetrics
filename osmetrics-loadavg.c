@@ -32,13 +32,11 @@ static ST_FIELD_INFO osmetrics_loadavg_table_fields[]=
 
 static int osmetrics_loadavg_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
 {
-  //double *load;
   struct sysinfo info;
   TABLE *table= tables->table;
   char fieldname[50];
   char comment[100];
 
-  //load = getLoadAvg();  /* pulls from a separate library but changed to doing natively */
   sysinfo(&info);
 
   // 1 minute load average
@@ -79,12 +77,12 @@ static int osmetrics_loadavg_table_init(void *ptr)
 mysql_declare_plugin(os_metrics_loadavg)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_loadavg_table_info,                /* type-specific descriptor */
+  &osmetrics_loadavg_table_info,     /* type-specific descriptor */
   "OS_LOADAVG",                      /* table name */
   "Michael Patrick",                 /* author */
-  "OS Metrics INFORMATION_SCHEMA table", /* description */
+  "OS Metrics: Load Average",       /* description */
   PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_loadavg_table_init,                 /* init function */
+  osmetrics_loadavg_table_init,      /* init function */
   NULL,
   0x0001,                            /* version = 0.1 */
   NULL,                              /* no status variables */

@@ -85,12 +85,12 @@ static int osmetrics_cpugovernor_table_init(void *ptr)
 mysql_declare_plugin(os_metrics_cpugovernor)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_cpugovernor_table_info,     /* type-specific descriptor */
-  "OS_CPUGOVERNOR",                      /* table name */
-  "Michael Patrick",                     /* author */
-  "OS Metrics CPU Governor INFORMATION_SCHEMA table", /* description */
+  &osmetrics_cpugovernor_table_info, /* type-specific descriptor */
+  "OS_CPUGOVERNOR",                  /* table name */
+  "Michael Patrick",                 /* author */
+  "OS Metrics: CPU Gorvernor",       /* description */
   PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_cpugovernor_table_init,                 /* init function */
+  osmetrics_cpugovernor_table_init,  /* init function */
   NULL,
   0x0001,                            /* version = 0.1 */
   NULL,                              /* no status variables */

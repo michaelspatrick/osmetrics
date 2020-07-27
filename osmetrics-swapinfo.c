@@ -103,17 +103,17 @@ static int osmetrics_swaps_table_init(void *ptr)
 mysql_declare_plugin(os_metrics_swaps)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_swaps_table_info,                /* type-specific descriptor */
-  "OS_SWAPS",                      /* table name */
-  "Michael Patrick",                 /* author */
-  "OS Metrics Swaps INFORMATION_SCHEMA table", /* description */
-  PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_swaps_table_init,                 /* init function */
+  &osmetrics_swaps_table_info,                 /* type-specific descriptor */
+  "OS_SWAPS",                                  /* table name */
+  "Michael Patrick",                           /* author */
+  "OS Metrics: Swaps",                         /* description */
+  PLUGIN_LICENSE_GPL,                          /* license type */
+  osmetrics_swaps_table_init,                  /* init function */
   NULL,
-  0x0001,                            /* version = 0.1 */
-  NULL,                              /* no status variables */
-  NULL,                              /* no system variables */
-  NULL,                              /* no reserved information */
-  0                                  /* no flags */
+  0x0001,                                      /* version = 0.1 */
+  NULL,                                        /* no status variables */
+  NULL,                                        /* no system variables */
+  NULL,                                        /* no reserved information */
+  0                                            /* no flags */
 }
 mysql_declare_plugin_end;

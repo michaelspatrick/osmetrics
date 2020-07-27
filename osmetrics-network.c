@@ -80,17 +80,17 @@ static int osmetrics_network_table_init(void *ptr)
 mysql_declare_plugin(osmetrics_network)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_network_table_info,                /* type-specific descriptor */
-  "OS_NETWORK",                      /* table name */
-  "Michael Patrick",                 /* author */
-  "OS Metrics Network INFORMATION_SCHEMA table", /* description */
-  PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_network_table_init,                 /* init function */
+  &osmetrics_network_table_info,                 /* type-specific descriptor */
+  "OS_NETWORK",                                  /* table name */
+  "Michael Patrick",                             /* author */
+  "OS Metrics: Network Stats",                   /* description */
+  PLUGIN_LICENSE_GPL,                            /* license type */
+  osmetrics_network_table_init,                  /* init function */
   NULL,
-  0x0001,                            /* version = 0.1 */
-  NULL,                              /* no status variables */
-  NULL,                              /* no system variables */
-  NULL,                              /* no reserved information */
-  0                                  /* no flags */
+  0x0001,                                        /* version = 0.1 */
+  NULL,                                          /* no status variables */
+  NULL,                                          /* no system variables */
+  NULL,                                          /* no reserved information */
+  0                                              /* no flags */
 }
 mysql_declare_plugin_end;

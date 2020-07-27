@@ -66,8 +66,7 @@ void ltrim(char *src) {
 int strpos(char *haystack, char *needle)
 {
    char *p = strstr(haystack, needle);
-   if (p)
-      return p - haystack;
+   if (p) return p - haystack;
    return -1;   // Not found = -1.
 }
 
@@ -94,7 +93,7 @@ static int osmetrics_meminfo_fill_table(THD *thd, TABLE_LIST *tables, Item *cond
       table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
       int found = strpos((char*)val, (char*)"kB")-1;
       if (found > 0) {
-	char newstr[256]="";
+	      char newstr[256]="";
         for (int i=0; i<found; i++) strncat(newstr, &val[i], 1);
         unsigned int newval=atoi(newstr) * 1024;
         table->field[1]->store(newval);
@@ -119,12 +118,12 @@ static int osmetrics_meminfo_table_init(void *ptr)
 mysql_declare_plugin(osmetrics_meminfo)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_meminfo_table_info,                /* type-specific descriptor */
+  &osmetrics_meminfo_table_info,     /* type-specific descriptor */
   "OS_MEMINFO",                      /* table name */
   "Michael Patrick",                 /* author */
-  "OS metrics from /proc/meminfo", /* description */
+  "OS Metrics: Memory Info",   /* description */
   PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_meminfo_table_init,                 /* init function */
+  osmetrics_meminfo_table_init,      /* init function */
   NULL,
   0x0001,                            /* version = 0.1 */
   NULL,                              /* no status variables */

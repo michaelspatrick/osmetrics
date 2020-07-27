@@ -24,7 +24,7 @@ static ST_FIELD_INFO osmetrics_diskstats_table_fields[]=
 {
   {"major_num", 6, MYSQL_TYPE_FLOAT, 0, MY_I_S_UNSIGNED, 0, 0},
   {"minor_num", 6, MYSQL_TYPE_FLOAT, 0, MY_I_S_UNSIGNED, 0, 0},
-  {"device", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"device", 20, MYSQL_TYPE_STRING, 0, 0, 0, 0},
   {"reads_success", 6, MYSQL_TYPE_FLOAT, 0, MY_I_S_UNSIGNED, 0, 0},
   {"reads_merged", 6, MYSQL_TYPE_FLOAT, 0, MY_I_S_UNSIGNED, 0, 0},
   {"sectors_read", 6, MYSQL_TYPE_FLOAT, 0, MY_I_S_UNSIGNED, 0, 0},
@@ -119,12 +119,12 @@ static int osmetrics_diskstats_table_init(void *ptr)
 mysql_declare_plugin(osmetrics_diskstats)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_diskstats_table_info,                /* type-specific descriptor */
-  "OS_DISKSTATS",                      /* table name */
+  &osmetrics_diskstats_table_info,   /* type-specific descriptor */
+  "OS_DISKSTATS",                    /* table name */
   "Michael Patrick",                 /* author */
-  "OS metrics from /proc/diskstats", /* description */
+  "OS Metrics: Disk Statistics",     /* description */
   PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_diskstats_table_init,                 /* init function */
+  osmetrics_diskstats_table_init,    /* init function */
   NULL,
   0x0001,                            /* version = 0.1 */
   NULL,                              /* no status variables */

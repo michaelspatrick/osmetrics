@@ -52,7 +52,7 @@ static int osmetrics_version_fill_table(THD *thd, TABLE_LIST *tables, Item *cond
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
   table->field[1]->store(buffer.nodename, strlen(buffer.nodename), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
-  
+
     strcpy(fieldname, "release");
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
   table->field[1]->store(buffer.release, strlen(buffer.release), system_charset_info);
@@ -89,17 +89,17 @@ static int osmetrics_version_table_init(void *ptr)
 mysql_declare_plugin(os_metrics_version)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_version_table_info,                /* type-specific descriptor */
-  "OS_VERSION",                      /* table name */
-  "Michael Patrick",                 /* author */
-  "OS Metrics Version INFORMATION_SCHEMA table", /* description */
-  PLUGIN_LICENSE_GPL,                /* license type */
-  osmetrics_version_table_init,                 /* init function */
+  &osmetrics_version_table_info,                   /* type-specific descriptor */
+  "OS_VERSION",                                    /* table name */
+  "Michael Patrick",                               /* author */
+  "OS Metrics: Version Info",                      /* description */
+  PLUGIN_LICENSE_GPL,                              /* license type */
+  osmetrics_version_table_init,                    /* init function */
   NULL,
-  0x0001,                            /* version = 0.1 */
-  NULL,                              /* no status variables */
-  NULL,                              /* no system variables */
-  NULL,                              /* no reserved information */
-  0                                  /* no flags */
+  0x0001,                                          /* version = 0.1 */
+  NULL,                                            /* no status variables */
+  NULL,                                            /* no system variables */
+  NULL,                                            /* no reserved information */
+  0                                                /* no flags */
 }
 mysql_declare_plugin_end;
