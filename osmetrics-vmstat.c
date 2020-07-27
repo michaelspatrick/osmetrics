@@ -31,11 +31,10 @@ static int osmetrics_vmstat_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   TABLE *table= tables->table;
 
   char line[256];
-  FILE* fp = fopen("/proc/stat", "r");
+  FILE* fp = fopen("/proc/vmstat", "r");
   char name[255];
   char val[255];
 
-  fp = fopen("/proc/vmstat", "r");
   assert(fp != NULL);
   while (fgets(line, sizeof(line), fp)) {
     sscanf( line, "%s %s", name, val);

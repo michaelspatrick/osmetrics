@@ -33,10 +33,9 @@ static int osmetrics_mounts_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   TABLE *table= tables->table;
 
   char line[256];
-  FILE* fp = fopen("/proc/stat", "r");
+  FILE* fp = fopen("/proc/mounts", "r");
   char device[255], mount_point[255], file_system_type[255], mount_options[255];
 
-  fp = fopen("/proc/mounts", "r");
   assert(fp != NULL);
   while (fgets(line, sizeof(line), fp)) {
     sscanf( line, "%s %s %s %s", device, mount_point, file_system_type, mount_options);
