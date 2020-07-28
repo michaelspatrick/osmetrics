@@ -176,6 +176,14 @@ static int osmetrics_cpu_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
     if (schema_table_store_record(thd, table)) return 1;
   }
 
+  // Number of current processes
+  strcpy(fieldname, "procs");
+  strcpy(comment, "Number of current processes");
+  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
+  table->field[1]->store(info.procs);
+  table->field[2]->store(comment, strlen(comment), system_charset_info);
+  if (schema_table_store_record(thd, table)) return 1;
+
   // CPU Processes Overall
   if (ps.processes >= 0) {
     strcpy(fieldname, "processes");
@@ -236,16 +244,8 @@ static int osmetrics_cpu_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 
-  // Number of current processes
-  strcpy(fieldname, "procs");
-  strcpy(comment, "Number of current processes");
-  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store(info.procs);
-  table->field[2]->store(comment, strlen(comment), system_charset_info);
-  if (schema_table_store_record(thd, table)) return 1;
-
   // user CPU time used in seconds
-  strcpy(fieldname, "uptime_tv_sec");
+  strcpy(fieldname, "utime_tv_sec");
   strcpy(comment, "User CPU time used (in seconds)");
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
   table->field[1]->store(buf.ru_utime.tv_sec);

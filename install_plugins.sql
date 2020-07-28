@@ -9,6 +9,7 @@ INSTALL PLUGIN OS_MEMORY SONAME 'osmetrics-memory.so';
 INSTALL PLUGIN OS_MISC SONAME 'osmetrics-misc.so';
 INSTALL PLUGIN OS_MOUNTS SONAME 'osmetrics-mounts.so';
 INSTALL PLUGIN OS_NETWORK SONAME 'osmetrics-network.so';
+INSTALL PLUGIN OS_STAT SONAME 'osmetrics-stat.so';
 INSTALL PLUGIN OS_SWAPINFO SONAME 'osmetrics-swapinfo.so';
-INSTALL PLUGIN OS_VERSION SONAME 'osmetrics-version.so';    
+INSTALL PLUGIN OS_VERSION SONAME 'osmetrics-version.so';
 INSTALL PLUGIN OS_VMSTAT SONAME 'osmetrics-vmstat.so';

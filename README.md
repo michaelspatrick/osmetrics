@@ -65,6 +65,7 @@ Finally, you can login to MySQL and activate the plugins:
     mysql> INSTALL PLUGIN OS_MISC SONAME 'osmetrics-misc.so';
     mysql> INSTALL PLUGIN OS_MOUNTS SONAME 'osmetrics-mounts.so';
     mysql> INSTALL PLUGIN OS_NETWORK SONAME 'osmetrics-network.so';
+    mysql> INSTALL PLUGIN OS_STAT SONAME 'osmetrics-stat.so';
     mysql> INSTALL PLUGIN OS_SWAPINFO SONAME 'osmetrics-swapinfo.so';
     mysql> INSTALL PLUGIN OS_VERSION SONAME 'osmetrics-version.so';    
     mysql> INSTALL PLUGIN OS_VMSTAT SONAME 'osmetrics-vmstat.so';
@@ -92,6 +93,7 @@ If all went well, you should see several new plugins available.  Just make sure 
     | OS_MISC                     | ACTIVE   | INFORMATION SCHEMA | osmetrics-misc.so          | GPL     |
     | OS_MOUNTS                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-mounts.so        | GPL     |
     | OS_NETWORK                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-network.so       | GPL     |
+    | OS_STAT                     | ACTIVE   | INFORMATION SCHEMA | osmetrics-stat.so          | GPL     |
     | OS_SWAPINFO                 | ACTIVE   | INFORMATION SCHEMA | osmetrics-swapinfo.so      | GPL     |
     | OS_VERSION                  | ACTIVE   | INFORMATION SCHEMA | osmetrics-version.so       | GPL     |
     | OS_VMSTAT                   | ACTIVE   | INFORMATION SCHEMA | osmetrics-vmstat.so        | GPL     |
@@ -293,6 +295,13 @@ Let's look at example output from each of the plugins below:
     +-----------+------------+------------+----------+----------+------------+------------+-----------+-----------+
     2 rows in set (0.00 sec)
 
+    mysql> SELECT * FROM INFORMATION_SCHEMA.OS_STAT;
+    | pid  | comm     | state | ppid | pgrp | session | tty_nr | tpgid | flags   | minflt | cminflt | majflt | cmajflt | utime | stime | cutime | cstime | priority | nice | num_threads | itrealvalue | starttime | vsize      | rss   | rsslim                | startcode | endcode  | startstack      | kstkeep | kstkeip | signal | blocked | sigignore | sigcatch | wchan | nswap | cnswap | exit_signal | processor | rt_priority | policy | delayacct_blkio_ticks | guest_time | cguest_time | start_data | end_data | start_brk | arg_start       | arg_end         | env_start       | env_end         | exit_code |
+    +------+----------+-------+------+------+---------+--------+-------+---------+--------+---------+--------+---------+-------+-------+--------+--------+----------+------+-------------+-------------+-----------+------------+-------+-----------------------+-----------+----------+-----------------+---------+---------+--------+---------+-----------+----------+-------+-------+--------+-------------+-----------+-------------+--------+-----------------------+------------+-------------+------------+----------+-----------+-----------------+-----------------+-----------------+-----------------+-----------+
+    | 6656 | (mysqld) | S     | 2030 | 1896 |    1896 |      0 |    -1 | 4194304 |  34784 |       0 |      0 |       0 |    96 |    55 |      0 |      0 |       20 |    0 |          29 |           0 |    965078 | 1153900544 | 37324 | 1.8446744073709552e19 |   4194304 | 27414570 | 140728454321408 |       0 |       0 |      0 |  540679 |     12294 |     1768 |     0 |     0 |      0 |          17 |         0 |           0 |      0 |                     4 |          0 |           0 |   29511728 | 31209920 |  36462592 | 140728454327797 | 140728454328040 | 140728454328040 | 140728454328281 |         0 |
+    +------+----------+-------+------+------+---------+--------+-------+---------+--------+---------+--------+---------+-------+-------+--------+--------+----------+------+-------------+-------------+-----------+------------+-------+-----------------------+-----------+----------+-----------------+---------+---------+--------+---------+-----------+----------+-------+-------+--------+-------------+-----------+-------------+--------+-----------------------+------------+-------------+------------+----------+-----------+-----------------+-----------------+-----------------+-----------------+-----------+
+    1 row in set (0.00 sec)
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_SWAPINFO;
     +---------------+-------+--------------------------------------+
     | name          | value | comment                              |
@@ -469,6 +478,7 @@ To uninstall the plugins, you can remove them with the following SQL commands.  
     mysql> UNINSTALL PLUGIN OS_MISC;
     mysql> UNINSTALL PLUGIN OS_MOUNTS;
     mysql> UNINSTALL PLUGIN OS_NETWORK;
+    mysql> UNINSTALL PLUGIN OS_STAT;
     mysql> UNINSTALL PLUGIN OS_SWAPINFO;
     mysql> UNINSTALL PLUGIN OS_VERSION;
     mysql> UNINSTALL PLUGIN OS_VMSTAT;
