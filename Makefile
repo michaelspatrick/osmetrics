@@ -12,7 +12,7 @@ CFLAGS=-DMYSQL_DYNAMIC_PLUGIN -Wall -fPIC -shared \
 -I./
 
 all: osmetrics-cpu.so osmetrics-network.so osmetrics-loadavg.so osmetrics-swapinfo.so osmetrics-memory.so osmetrics-vmstat.so osmetrics-cpuinfo.so osmetrics-mounts.so osmetrics-misc.so \
-     osmetrics-diskstats.so osmetrics-version.so osmetrics-ioscheduler.so osmetrics-meminfo.so osmetrics-cpugovernor.so
+     osmetrics-diskstats.so osmetrics-version.so osmetrics-ioscheduler.so osmetrics-meminfo.so osmetrics-cpugovernor.so osmetrics-stat.so
 
 osmetrics-cpu.so: osmetrics-cpu.c
         $(CC) $(CFLAGS) -o osmetrics-cpu.so osmetrics-cpu.c
@@ -56,6 +56,9 @@ osmetrics-meminfo.so: osmetrics-meminfo.c
 osmetrics-cpugovernor.so: osmetrics-cpugovernor.c
         $(CC) $(CFLAGS) -o osmetrics-cpugovernor.so osmetrics-cpugovernor.c
 
+osmetrics-stat.so: osmetrics-stat.c
+        $(CC) $(CFLAGS) -o osmetrics-stat.so osmetrics-stat.c
+	
 clean:
       	rm -f ${PLUGINDIR}/osmetrics-cpu.so
         rm -f ${PLUGINDIR}/osmetrics-network.so
@@ -69,8 +72,9 @@ clean:
         rm -f ${PLUGINDIR}/osmetrics-diskstats.so
         rm -f ${PLUGINDIR}/osmetrics-version.so
         rm -f ${PLUGINDIR}/osmetrics-ioscheduler.so
-	      rm -f ${PLUGINDIR}/osmetrics-meminfo.so
+	rm -f ${PLUGINDIR}/osmetrics-meminfo.so
       	rm -f ${PLUGINDIR}/osmetrics-cpugovernor.so
+	rm -f ${PLUGINDIR}/osmetrics-stat.so
         rm -f osmetrics-cpu.so
         rm -f osmetrics-network.so
         rm -f osmetrics-loadavg.so
@@ -85,6 +89,7 @@ clean:
         rm -f osmetrics-ioscheduler.so
       	rm -f osmetrics-meminfo.so
       	rm -f osmetrics-cpugovernor.so
+	rm -f osmetrics-stat.so
 
 install:
         cp -f osmetrics-cpu.so ${PLUGINDIR}
@@ -101,6 +106,7 @@ install:
         cp -f osmetrics-ioscheduler.so ${PLUGINDIR}
         cp -f osmetrics-meminfo.so ${PLUGINDIR}
       	cp -f osmetrics-cpugovernor.so ${PLUGINDIR}
+	cp -f osmetrics-stat.so ${PLUGINDIR}
 
 uninstall:
       	rm -f ${PLUGINDIR}/osmetrics-cpu.so
@@ -117,6 +123,7 @@ uninstall:
         rm -f ${PLUGINDIR}/osmetrics-ioscheduler.so
       	rm -f ${PLUGINDIR}/osmetrics-meminfo.so
       	rm -f ${PLUGINDIR}/osmetrics-cpugovernor.so
+	rm -f ${PLUGINDIR}/osmetrics-stat.so
 
 distclean:
         rm -f osmetrics-cpu.so
@@ -133,3 +140,4 @@ distclean:
         rm -f osmetrics-ioscheduler.so
       	rm -f osmetrics-meminfo.so
       	rm -f osmetrics-cpugovernor.so
+	rm -f osmetrics-stat.so
