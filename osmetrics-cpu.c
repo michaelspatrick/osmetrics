@@ -11,16 +11,8 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/sysinfo.h>
-//#include <sys/statvfs.h>
-//#include <arpa/inet.h>
-//#include <sys/socket.h>
-//#include <netdb.h>
-//#include <unistd.h>
-//#include <linux/if_link.h>
 
 using namespace std;
-
-//extern char *mysql_data_home;
 
 static struct st_mysql_information_schema osmetrics_cpu_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 
