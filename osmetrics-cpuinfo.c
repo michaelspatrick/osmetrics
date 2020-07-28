@@ -8,22 +8,37 @@
 #include <mysql_version.h>
 #include <mysql/plugin.h>
 #include <my_global.h>
-#include <includes/getcpu.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <sys/sysinfo.h>
-#include <sys/statvfs.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
 
 static struct st_mysql_information_schema osmetrics_cpuinfo_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 
 static ST_FIELD_INFO osmetrics_cpuinfo_table_fields[]=
 {
-  {"name", 40, MYSQL_TYPE_STRING, 0, 0, 0, 0},
-  {"value", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"processor", 3, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"vendor_id", 20, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"cpu_family", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"model", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"model_name", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"stepping", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"microcode", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"cpu_MHz", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"cache_size", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"physical_id", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"siblings", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"core_id", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"cpu_cores", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"apicid", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"initial_apicid", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"fpu", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"fpu_exception", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"cpuid_level", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"wp", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"flags", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"bugs", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"bogomips", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"clflush_size", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"cache_alignment", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"address_sizes", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
+  {"power_management", 1100, MYSQL_TYPE_STRING, 0, 0, 0, 0},
   {0, 0, MYSQL_TYPE_NULL, 0, 0, 0, 0}
 };
 

@@ -11,16 +11,16 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <sys/sysinfo.h>
-#include <sys/statvfs.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <linux/if_link.h>
+//#include <sys/statvfs.h>
+//#include <arpa/inet.h>
+//#include <sys/socket.h>
+//#include <netdb.h>
+//#include <unistd.h>
+//#include <linux/if_link.h>
 
 using namespace std;
 
-extern char *mysql_data_home;
+//extern char *mysql_data_home;
 
 static struct st_mysql_information_schema osmetrics_cpu_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 
@@ -39,6 +39,7 @@ static int osmetrics_cpu_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   TABLE *table= tables->table;
   char fieldname[50];
   char comment[100];
+  char pct[10]="";
 
   procstat ps;
   ps = getprocstat();
@@ -59,8 +60,9 @@ static int osmetrics_cpu_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   if (ps.cpu_speed >= 0) {
     strcpy(fieldname, "speed");
     strcpy(comment, "CPU speed in MHz");
+    sprintf(pct, "%.3f", ps.cpu_speed);
     table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-    table->field[1]->store(ps.cpu_speed);
+    table->field[1]->store(atof(pct));
     table->field[2]->store(comment, strlen(comment), system_charset_info);
     if (schema_table_store_record(thd, table)) return 1;
   }
@@ -69,8 +71,9 @@ static int osmetrics_cpu_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   if (ps.cpu_speed >= 0) {
     strcpy(fieldname, "bogomips");
     strcpy(comment, "CPU bogomips");
+    sprintf(pct, "%.2f", ps.cpu_bogomips);
     table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-    table->field[1]->store(ps.cpu_bogomips);
+    table->field[1]->store(atof(pct));
     table->field[2]->store(comment, strlen(comment), system_charset_info);
     if (schema_table_store_record(thd, table)) return 1;
   }
@@ -224,18 +227,20 @@ static int osmetrics_cpu_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   // CPU Util Overall
   double proctimes = ( ps.user + ps.nice + ps.sys + ps.idle + ps.iowait + ps.irq + ps.softirq );
   double avg_idle_pct = (double)ps.idle * 100 / proctimes;
+  sprintf(pct, "%.2f", avg_idle_pct);
   strcpy(fieldname, "idle_pct");
   strcpy(comment, "Average CPU idle time");
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store(avg_idle_pct);
+  table->field[1]->store(atof(pct));
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 
   // CPU Util Overall
   strcpy(fieldname, "util_pct");
   strcpy(comment, "Average CPU utilization");
+  sprintf(pct, "%.2f", 100 - avg_idle_pct);
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store((100 - avg_idle_pct));
+  table->field[1]->store(atof(pct));
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 

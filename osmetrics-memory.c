@@ -2,23 +2,10 @@
 #include <table.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <ctype.h>
-#include <string.h>
 #include <mysql_version.h>
 #include <mysql/plugin.h>
 #include <my_global.h>
-#include <includes/getcpu.h>
-#include <sys/time.h>
-#include <sys/resource.h>
 #include <sys/sysinfo.h>
-#include <sys/statvfs.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <linux/if_link.h>
-
-extern char *mysql_data_home;
 
 static struct st_mysql_information_schema osmetrics_memory_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 
@@ -37,6 +24,7 @@ static int osmetrics_memory_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   TABLE *table= tables->table;
   char fieldname[50];
   char comment[100];
+  char pct[10] = "";
 
   sysinfo(&info);
 
@@ -67,16 +55,18 @@ static int osmetrics_memory_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   // Available memory (percentage)
   strcpy(fieldname, "free_ram_pct");
   strcpy(comment, "Available memory as a percentage");
+  sprintf(pct, "%.2f", (float) info.freeram / info.totalram * 100 * info.mem_unit);
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store((float) info.freeram / info.totalram * 100 * info.mem_unit);
+  table->field[1]->store(atof(pct));
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 
   // Used memory (percentage)
   strcpy(fieldname, "used_ram_pct");
   strcpy(comment, "Free memory as a percentage");
+  sprintf(pct, "%.2f", (float) (info.totalram - info.freeram) / info.totalram * 100 * info.mem_unit);
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store((float) (info.totalram - info.freeram) / info.totalram * 100 * info.mem_unit);
+  table->field[1]->store(atof(pct));
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 
@@ -133,14 +123,6 @@ static int osmetrics_memory_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   strcpy(comment, "Maximum resident set size");
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
   table->field[1]->store(buf.ru_maxrss);
-  table->field[2]->store(comment, strlen(comment), system_charset_info);
-  if (schema_table_store_record(thd, table)) return 1;
-
-  // maximum resident set size in bytes
-  strcpy(fieldname, "maxrss_bytes");
-  strcpy(comment, "Maximum resident set size (in bytes)");
-  table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store(buf.ru_maxrss * 1024);
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 

@@ -7,22 +7,7 @@
 #include <mysql_version.h>
 #include <mysql/plugin.h>
 #include <my_global.h>
-#include <includes/getcpu.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <sys/sysinfo.h>
-#include <sys/statvfs.h>
-#include <sys/utsname.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <linux/if_link.h>
 #include <dirent.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-
-extern char *mysql_data_home;
 
 char* strip_newlines(char* szX) {
     int i = strlen(szX);

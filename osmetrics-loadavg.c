@@ -3,22 +3,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <string.h>
 #include <mysql_version.h>
 #include <mysql/plugin.h>
 #include <my_global.h>
-#include <includes/getcpu.h>
-#include <sys/time.h>
-#include <sys/resource.h>
 #include <sys/sysinfo.h>
-#include <sys/statvfs.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <linux/if_link.h>
-
-extern char *mysql_data_home;
 
 static struct st_mysql_information_schema osmetrics_loadavg_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 
@@ -36,30 +24,34 @@ static int osmetrics_loadavg_fill_table(THD *thd, TABLE_LIST *tables, Item *cond
   TABLE *table= tables->table;
   char fieldname[50];
   char comment[100];
+  char pct[10] = "";
 
   sysinfo(&info);
 
   // 1 minute load average
   strcpy(fieldname, "1_min");
   strcpy(comment, "1 minute load average");
+  sprintf(pct, "%.02f", (double) info.loads[0] / 65536);
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store((float) info.loads[0] / 65536);
+  table->field[1]->store(atof(pct));
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 
   // 5 minute load average
   strcpy(fieldname, "5_min");
   strcpy(comment, "5 minute load average");
+  sprintf(pct, "%.02f", (double) info.loads[1] / 65536);
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store((float) info.loads[1] / 65536);
+  table->field[1]->store(atof(pct));
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 
   // 15 minute load average
   strcpy(fieldname, "15_min");
   strcpy(comment, "15 minute load average");
+  sprintf(pct, "%.02f", (double) info.loads[2] / 65536);
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store((float) info.loads[2] / 65536);
+  table->field[1]->store(atof(pct));
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 

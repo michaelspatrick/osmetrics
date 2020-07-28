@@ -3,20 +3,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdio.h>
-#include <ctype.h>
-#include <string.h>
+//#include <ctype.h>
+//#include <string.h>
 #include <mysql_version.h>
 #include <mysql/plugin.h>
 #include <my_global.h>
-#include <includes/getcpu.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <sys/sysinfo.h>
-#include <sys/statvfs.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
+//#include <includes/getcpu.h>
+//#include <sys/time.h>
+//#include <sys/resource.h>
+//#include <sys/sysinfo.h>
+//#include <sys/statvfs.h>
+//#include <arpa/inet.h>
+//#include <sys/socket.h>
+//#include <netdb.h>
+//#include <unistd.h>
 
 static struct st_mysql_information_schema osmetrics_meminfo_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 
@@ -40,19 +40,18 @@ char* strip_tabs(char* szX) {
 }
 
 char* uniq_spc(char* str){
-    char *from, *to;
-    int spc=0;
-    to=from=str;
-    while(1){
-	if(spc && *from == ' ' && to[-1] == ' ')
-            ++from;
-        else {
-            spc = (*from==' ')? 1 : 0;
-            *to++ = *from++;
-            if(!to[-1])break;
-        }
-    }
-    return str;
+  char *from, *to;
+  int spc=0;
+  to=from=str;
+  while(1){
+ 	  if(spc && *from == ' ' && to[-1] == ' ') ++from;
+      else {
+          spc = (*from==' ')? 1 : 0;
+          *to++ = *from++;
+          if(!to[-1])break;
+      }
+  }
+  return str;
 }
 
 void ltrim(char *src) {
