@@ -5,7 +5,7 @@ Values are pulled via standard C library calls and some are read from the /proc 
 
 Many variables were added to show what was possible.  Some of these may not be of interest.  I just wanted to see what kind of stuff was possible and would tweak these over time.  
 
-Also, none of the calculations were rounded.  This was done just to keep precision for graphing of values but could easily be canged later.
+Also, none of the calculations were rounded.  This was done just to keep precision for graphing of values but could easily be changed later.
 
 If there is interest, this could be expanded to add more metrics and unnecessary ones removed.  Just looking for feedback.
 
@@ -23,15 +23,15 @@ Uncompress the file and go into the directory:
 
     tar -zxvf percona-server-5.7.17-13.tar.gz
     cd percona-server-5.7.17-13
-    
+
 I also had to add a few utilities:
 
     sudo yum install cmake
     sudo yum install boost
     sudo yum install ncurses-devel
     sudo yum install readline-devel
-    cmake -DDOWNLOAD_BOOST=1 -DWITH_BOOST=.. 
-    
+    cmake -DDOWNLOAD_BOOST=1 -DWITH_BOOST=..
+
 #### Compiling the Plugins
 First, you will need to put the plugin code in the plugin directory of the source code you downloaded.  For me, this was "/home/ec2-user/percona-server-5.7.17-13/plugin" and I named the directory "osmetrics".  Of course, you can just do a "git" to retrieve this to your server or download as a zip file and decompress.  Just make sure it is placed into the "plugin" directory of the source code as noted above.
 
@@ -50,7 +50,7 @@ You will then need to edit the Makefile and define this path there.  Once that i
     make clean
     make
     make install
-    
+
 #### Installing the Plugins
 Finally, you can login to MySQL and activate the plugins:
 
@@ -68,7 +68,7 @@ Finally, you can login to MySQL and activate the plugins:
     mysql> INSTALL PLUGIN OS_SWAPINFO SONAME 'osmetrics-swapinfo.so';
     mysql> INSTALL PLUGIN OS_VERSION SONAME 'osmetrics-version.so';    
     mysql> INSTALL PLUGIN OS_VMSTAT SONAME 'osmetrics-vmstat.so';
-    
+
 Alternatively, you can run the install SQL script:
 
     mysql> SOURCE /path/to/install_plugins.sql
@@ -101,44 +101,44 @@ If all went well, you should see several new plugins available.  Just make sure 
 Let's look at example output from each of the plugins below:
 
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPU;
-    +---------------+---------------------+--------------------------------------------------------------------+
-    | name          | value               | comment                                                            |
-    +---------------+---------------------+--------------------------------------------------------------------+
-    | numcores      |                   1 | Number of virtual CPU cores                                        |
-    | speed         |      2300.123046875 | CPU speed in MHz                                                   |
-    | bogomips      |      4600.080078125 | CPU bogomips                                                       |
-    | user          |                  29 | Normal processes executing in user mode                            |
-    | nice          |               11172 | Niced processes executing in user mode                             |
-    | sys           |             9909218 | Processes executing in kernel mode                                 |
-    | idle          |                2759 | Processes which are idle                                           |
-    | iowait        |                   0 | Processes waiting for I/O to complete                              |
-    | irq           |                  78 | Processes servicing interrupts                                     |
-    | softirq       |                1710 | Processes servicing Softirqs                                       |
-    | guest         |                   0 | Processes running a guest                                          |
-    | guest_nice    |                   0 | Processes running a niced guest                                    |
-    | intr          |             1852045 | Count of interrupts serviced since boot time                       |
-    | ctxt          |             5277147 | Total number of context switches across all CPUs                   |
-    | btime         |          1595028203 | Ttime at which the system booted, in seconds since the Unix epoch  |
-    | processes     |               22357 | Number of processes and threads created                            |
-    | procs_running |                   2 | Total number of threads that are running or ready to run           |
-    | procs_blocked |                   0 | Number of processes currently blocked, waiting for I/O to complete |
-    | softirq       |                1710 | Counts of softirqs serviced since boot time                        |
-    | idle_pct      | 0.02779858389439319 | Average CPU idle time                                              |
-    | util_pct      |    99.9722014161056 | Average CPU utilization                                            |
-    | procs         |                 122 | Number of current processes                                        |
-    | uptime_tv_sec |                   1 | User CPU time used (in seconds)                                    |
-    | utime_tv_usec |              985439 | User CPU time used (in microseconds)                               |
-    | stime_tv_sec  |                   1 | System CPU time (in seconds)                                       |
-    | stime_tv_usec |              325261 | System CPU time (in microseconds)                                  |
-    | utime         |            1.985439 | Total user time                                                    |
-    | stime         |            1.325261 | Total system time                                                  |
-    | minflt        |               34805 | Page reclaims (soft page faults)                                   |
-    | majflt        |                   0 | Page faults                                                        |
-    | nvcsw         |               46703 | Number of voluntary context switches                               |
-    | nivcsw        |                 127 | Number of involuntary context switches                             |
-    +---------------+---------------------+--------------------------------------------------------------------+
+    +---------------+------------+--------------------------------------------------------------------+
+    | name          | value      | comment                                                            |
+    +---------------+------------+--------------------------------------------------------------------+
+    | numcores      |          1 | Number of virtual CPU cores                                        |
+    | speed         |   2299.892 | CPU speed in MHz                                                   |
+    | bogomips      |    4600.08 | CPU bogomips                                                       |
+    | user          |          0 | Normal processes executing in user mode                            |
+    | nice          |       4213 | Niced processes executing in user mode                             |
+    | sys           |     610627 | Processes executing in kernel mode                                 |
+    | idle          |        524 | Processes which are idle                                           |
+    | iowait        |          0 | Processes waiting for I/O to complete                              |
+    | irq           |          9 | Processes servicing interrupts                                     |
+    | softirq       |        765 | Processes servicing Softirqs                                       |
+    | guest         |          0 | Processes running a guest                                          |
+    | guest_nice    |          0 | Processes running a niced guest                                    |
+    | intr          |     200642 | Count of interrupts serviced since boot time                       |
+    | ctxt          |     434493 | Total number of context switches across all CPUs                   |
+    | btime         | 1595891204 | Ttime at which the system booted, in seconds since the Unix epoch  |
+    | processes     |       9270 | Number of processes and threads created                            |
+    | procs_running |          3 | Total number of threads that are running or ready to run           |
+    | procs_blocked |          0 | Number of processes currently blocked, waiting for I/O to complete |
+    | softirq       |        765 | Counts of softirqs serviced since boot time                        |
+    | idle_pct      |       0.09 | Average CPU idle time                                              |
+    | util_pct      |      99.91 | Average CPU utilization                                            |
+    | procs         |        120 | Number of current processes                                        |
+    | uptime_tv_sec |          1 | User CPU time used (in seconds)                                    |
+    | utime_tv_usec |     943740 | User CPU time used (in microseconds)                               |
+    | stime_tv_sec  |          1 | System CPU time (in seconds)                                       |
+    | stime_tv_usec |     315574 | System CPU time (in microseconds)                                  |
+    | utime         |    1.94374 | Total user time                                                    |
+    | stime         |   1.315574 | Total system time                                                  |
+    | minflt        |      34783 | Page reclaims (soft page faults)                                   |
+    | majflt        |          0 | Page faults                                                        |
+    | nvcsw         |        503 | Number of voluntary context switches                               |
+    | nivcsw        |        135 | Number of involuntary context switches                             |
+    +---------------+------------+--------------------------------------------------------------------+
     32 rows in set (0.00 sec)
-    
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_CPUGOVERNOR;
     +--------+-------------+
     | name   | governor    |
@@ -162,7 +162,7 @@ Let's look at example output from each of the plugins below:
     | xvda   | [noop]    |
     +--------+-----------+
     1 row in set (0.00 sec)
-    
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_DISKSTATS;
     +-----------+-----------+--------+---------------+--------------+--------------+---------------+----------------+---------------+-----------------+----------------+-----------------+------------------+---------------------------+
     | major_num | minor_num | device | reads_success | reads_merged | sectors_read | time_reads_ms | writes_success | writes_merged | sectors_written | time_writes_ms | ios_in_progress | time_doing_io_ms | weighted_time_doing_io_ms |
@@ -177,12 +177,12 @@ Let's look at example output from each of the plugins below:
     +--------+-------+------------------------+
     | name   | value | comment                |
     +--------+-------+------------------------+
-    | 1_min  |     0 | 1 minute load average  |
-    | 5_min  |     0 | 5 minute load average  |
-    | 15_min |     0 | 15 minute load average |
+    | 1_min  |  0.09 | 1 minute load average  |
+    | 5_min  |  0.02 | 5 minute load average  |
+    | 15_min |  0.01 | 15 minute load average |
     +--------+-------+------------------------+
     3 rows in set (0.00 sec)
-    
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_MEMINFO;
     +-----------------+------------+
     | name            | value      |
@@ -233,7 +233,7 @@ Let's look at example output from each of the plugins below:
     | DirectMap2M     | 2086666240 |
     +-----------------+------------+
     44 rows in set (0.00 sec)
-    
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_MEMORY;
     +----------------+-----------------------+--------------------------------------+
     | name           | value                 | comment                              |
@@ -241,8 +241,8 @@ Let's look at example output from each of the plugins below:
     | total_ram      |            2090319872 | Total usable main memory size        |
     | free_ram       |            1452339200 | Available memory size                |
     | used_ram       |             637980672 | Used memory size                     |
-    | free_ram_pct   |     69.47927856445312 | Available memory as a percentage     |
-    | used_ram_pct   |    30.520719528198242 | Free memory as a percentage          |
+    | free_ram_pct   |                 69.48 | Available memory as a percentage     |
+    | used_ram_pct   |                 30.52 | Free memory as a percentage          |
     | shared_ram     |                 61440 | Amount of shared memory              |
     | buffer_ram     |             108040192 | Memory used by buffers               |
     | total_high_ram |                     0 | Total high memory size               |
@@ -250,10 +250,9 @@ Let's look at example output from each of the plugins below:
     | total_low_ram  |            2090319872 | Total low memory size                |
     | free_low_ram   |            1452339200 | Available low memory size            |
     | maxrss         |       140308942222128 | Maximum resident set size            |
-    | maxrss_bytes   | 1.4367635683545907e17 | Maximum resident set size (in bytes) |
     +----------------+-----------------------+--------------------------------------+
-    13 rows in set (0.00 sec)
-    
+    12 rows in set (0.00 sec)
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_MISC;
     +-----------------------+-------------------+-------------------------------------------------+
     | name                  | value             | comment                                         |
@@ -261,7 +260,7 @@ Let's look at example output from each of the plugins below:
     | datadir_size          |        8318783488 | MySQL data directory size                       |
     | datadir_size_free     |        2277470208 | MySQL data directory size free space            |
     | datadir_size_used     |        6041313280 | MySQL data directory size used space            |
-    | datadir_size_used_pct | 72.62255699664148 | MySQL data directory used space as a percentage |
+    | datadir_size_used_pct |             72.62 | MySQL data directory used space as a percentage |
     | uptime                |            100026 | Uptime (in seconds)                             |
     | uptime_days           |                 1 | Uptime (in days)                                |
     | uptime_hours          |                27 | Uptime (in hours)                               |
@@ -293,7 +292,7 @@ Let's look at example output from each of the plugins below:
     | eth0      |     102533 |     144031 | 16962983 | 23600676 |          0 |          0 |         0 |         0 |
     +-----------+------------+------------+----------+----------+------------+------------+-----------+-----------+
     2 rows in set (0.00 sec)
-    
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_SWAPINFO;
     +---------------+-------+--------------------------------------+
     | name          | value | comment                              |
@@ -442,7 +441,7 @@ Let's look at example output from each of the plugins below:
     | swap_ra_hit               |        0 |
     +---------------------------+----------+
     130 rows in set (0.00 sec)
-    
+
     mysql> SELECT * FROM INFORMATION_SCHEMA.OS_VERSION;
     +------------+---------------------------+
     | name       | value                     |
@@ -477,7 +476,7 @@ To uninstall the plugins, you can remove them with the following SQL commands.  
 Alternatively, you can run the uninstall SQL script:
 
     mysql> SOURCE /path/to/uninstall_plugins.sql
-    
+
 #### What's next?
 
 Who knows.  If there is enough interest, I would be happy to expand the plugins.  First, I need to do some more code cleanup and performance test them.  I do not expect them to have a significant performance impact, but one never knows until you test...

@@ -3,20 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdio.h>
-#include <ctype.h>
-#include <string.h>
 #include <mysql_version.h>
 #include <mysql/plugin.h>
 #include <my_global.h>
-#include <includes/getcpu.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <sys/sysinfo.h>
-#include <sys/statvfs.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
 
 static struct st_mysql_information_schema osmetrics_diskstats_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 

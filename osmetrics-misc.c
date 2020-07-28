@@ -2,22 +2,12 @@
 #include <table.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <ctype.h>
-#include <string.h>
 #include <mysql_version.h>
 #include <mysql/plugin.h>
 #include <my_global.h>
 #include <includes/getcpu.h>
-#include <sys/time.h>
-#include <sys/resource.h>
 #include <sys/sysinfo.h>
 #include <sys/statvfs.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <ifaddrs.h>
-#include <unistd.h>
-#include <linux/if_link.h>
 
 extern char *mysql_data_home;
 
@@ -72,8 +62,11 @@ static int osmetrics_misc_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   // Datadir Size Used Percentage
   strcpy(fieldname, "datadir_size_used_pct");
   strcpy(comment, "MySQL data directory used space as a percentage");
+  char pct[10] = "";
+  //strcpy(pct, "");
+  sprintf(pct, "%.2f", (((double)(disk.f_blocks * disk.f_frsize) - (disk.f_bfree * disk.f_frsize)) / (double) (disk.f_blocks * disk.f_frsize)) * (double) 100);
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
-  table->field[1]->store(((double) ((disk.f_blocks * disk.f_frsize) - (disk.f_bfree * disk.f_frsize)) / (double) (disk.f_blocks * disk.f_frsize)) * (double) 100);
+  table->field[1]->store(atof(pct));
   table->field[2]->store(comment, strlen(comment), system_charset_info);
   if (schema_table_store_record(thd, table)) return 1;
 

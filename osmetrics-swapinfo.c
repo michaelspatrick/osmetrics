@@ -2,27 +2,25 @@
 #include <table.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <ctype.h>
-#include <string.h>
+//#include <ctype.h>
+//#include <string.h>
 #include <mysql_version.h>
 #include <mysql/plugin.h>
 #include <my_global.h>
-#include <includes/getcpu.h>
-#include <sys/time.h>
-#include <sys/resource.h>
+//#include <includes/getcpu.h>
+//#include <sys/time.h>
+//#include <sys/resource.h>
 #include <sys/sysinfo.h>
-#include <sys/statvfs.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <linux/if_link.h>
+//#include <sys/statvfs.h>
+//#include <arpa/inet.h>
+//#include <sys/socket.h>
+//#include <netdb.h>
+//#include <unistd.h>
+//#include <linux/if_link.h>
 
-extern char *mysql_data_home;
+static struct st_mysql_information_schema osmetrics_swapinfo_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
 
-static struct st_mysql_information_schema osmetrics_swaps_table_info = { MYSQL_INFORMATION_SCHEMA_INTERFACE_VERSION };
-
-static ST_FIELD_INFO osmetrics_swaps_table_fields[]=
+static ST_FIELD_INFO osmetrics_swapinfo_table_fields[]=
 {
   {"name", 25, MYSQL_TYPE_STRING, 0, 0, 0, 0},
   {"value", 6, MYSQL_TYPE_FLOAT, 0, MY_I_S_UNSIGNED, 0, 0},
@@ -30,7 +28,7 @@ static ST_FIELD_INFO osmetrics_swaps_table_fields[]=
   {0, 0, MYSQL_TYPE_NULL, 0, 0, 0, 0}
 };
 
-static int osmetrics_swaps_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
+static int osmetrics_swapinfo_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
 {
   struct sysinfo info;
   TABLE *table= tables->table;
@@ -92,23 +90,23 @@ static int osmetrics_swaps_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   return 0;
 }
 
-static int osmetrics_swaps_table_init(void *ptr)
+static int osmetrics_swapinfo_table_init(void *ptr)
 {
   ST_SCHEMA_TABLE *schema_table= (ST_SCHEMA_TABLE*)ptr;
-  schema_table->fields_info= osmetrics_swaps_table_fields;
-  schema_table->fill_table= osmetrics_swaps_fill_table;
+  schema_table->fields_info= osmetrics_swapinfo_table_fields;
+  schema_table->fill_table= osmetrics_swapinfo_fill_table;
   return 0;
 }
 
-mysql_declare_plugin(os_metrics_swaps)
+mysql_declare_plugin(os_metrics_swapinfo)
 {
   MYSQL_INFORMATION_SCHEMA_PLUGIN,
-  &osmetrics_swaps_table_info,                 /* type-specific descriptor */
-  "OS_SWAPS",                                  /* table name */
+  &osmetrics_swapinfo_table_info,                 /* type-specific descriptor */
+  "OS_SWAPINFO",                               /* table name */
   "Michael Patrick",                           /* author */
-  "OS Metrics: Swaps",                         /* description */
+  "OS Metrics: Swap Info",                     /* description */
   PLUGIN_LICENSE_GPL,                          /* license type */
-  osmetrics_swaps_table_init,                  /* init function */
+  osmetrics_swapinfo_table_init,                  /* init function */
   NULL,
   0x0001,                                      /* version = 0.1 */
   NULL,                                        /* no status variables */
