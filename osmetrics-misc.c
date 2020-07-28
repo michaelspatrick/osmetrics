@@ -63,7 +63,6 @@ static int osmetrics_misc_fill_table(THD *thd, TABLE_LIST *tables, Item *cond)
   strcpy(fieldname, "datadir_size_used_pct");
   strcpy(comment, "MySQL data directory used space as a percentage");
   char pct[10] = "";
-  //strcpy(pct, "");
   sprintf(pct, "%.2f", (((double)(disk.f_blocks * disk.f_frsize) - (disk.f_bfree * disk.f_frsize)) / (double) (disk.f_blocks * disk.f_frsize)) * (double) 100);
   table->field[0]->store(fieldname, strlen(fieldname), system_charset_info);
   table->field[1]->store(atof(pct));
